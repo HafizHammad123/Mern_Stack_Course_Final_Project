@@ -3,11 +3,14 @@ Read me file of a Blogging Project Using Mern Stack
 Features::
 1.Sign up
 2:Log in
-3:Only user which have login successfully will Create Blog Post 
-4:Edit Blog Post only the user which have created that Blog
-5:Update Blog Post only the user which have created that Blog
-6:Delete Blog Post only that user which have created that Blog
+3:Create Blog Post 
+4:Edit Blog Post 
+5:Update Blog Post 
+6:Delete Blog Post
 7:Comment any user on blog posts
+8:post detail view
+9:sort post by label
+10:search post by query
 
 
 Website Structure::
