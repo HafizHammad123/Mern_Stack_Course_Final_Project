@@ -1,10 +1,10 @@
 import React from "react";
-import Slider from "../Website_Components/Slider";
+import Banner from "../Website_Components/Banner";
 import Footer from "../Website_Components/Footer";
 export default function Blogs()
 {
     return<>
-    <Slider></Slider>
+    <Banner></Banner>
     <Footer></Footer>
     </>
 }

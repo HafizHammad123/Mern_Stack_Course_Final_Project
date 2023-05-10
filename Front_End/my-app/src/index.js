@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { ThemeProvider } from "@mui/material";
+import { ColorProject } from './Website_Components/Theme';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+     <ThemeProvider theme={ColorProject}>
     <App />
+     </ThemeProvider>
   </React.StrictMode>
 );
 

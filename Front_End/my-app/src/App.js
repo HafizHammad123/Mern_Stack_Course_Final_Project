@@ -4,6 +4,7 @@ import Blogs from "./Website_Pages/Blogs";
 import Contactus from "./Website_Pages/Contact";
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 
+
 function App() {
   return<>
   <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
     <Route path="/Contact_us" element={<Contactus/>}/>
      </Routes>
   </BrowserRouter>
+  
   
 
   
