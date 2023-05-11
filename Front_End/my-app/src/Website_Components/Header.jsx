@@ -16,7 +16,7 @@ export default function Header() {
         }
     }
     return <>
-        <Stack p={2}  position={"sticky"} >
+        <Stack p={1}  position={"sticky"} borderBottom={1} borderColor={"#ffffff45"}>
             <Stack flexDirection={"row"} sx={{justifyContent:{md:"flex-start",xs:"space-between"}}}>
 
                 <Box color="white" flex={3} display={"flex"} alignItems={"center"} fontFamily={"Raleway"}>Blogging</Box>

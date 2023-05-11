@@ -6,5 +6,6 @@ export default function Blogs()
     return<>
     <Banner></Banner>
     <Footer></Footer>
+
     </>
 }

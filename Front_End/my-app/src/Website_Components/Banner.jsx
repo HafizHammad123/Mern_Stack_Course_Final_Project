@@ -1,28 +1,30 @@
 import React from "react";
 import Header from "./Header";
+import SlideContent from "./Slide_Content";
 import { Stack, Button, TextField, Box } from '@mui/material'
 import Image from '../Website_Components/Images/Blogging.jpg'
 import { useState } from "react";
 export default function Banner() {
     const [urldoc] = useState(document.URL === 'http://localhost:3000/Blogs')
+    console.log(urldoc)
 
 
     return <>
-        <Stack height={"550px"} sx={{
+        <Stack height={"565px"} sx={{
             backgroundImage: `url(${Image})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundAttachment: "fixed"
         }}
-        >   <Stack justifyContent={"space-between"} height='100%' sx={{
+        >   <Stack  height='100%' sx={{
             backgroundColor: '#000000b0',
 
         }}>
                 <Header></Header>
-                <Stack color={"white"} p={2} marginBottom={5} >
-                    <Stack></Stack>
+                <Stack height={"100%"} justifyContent={"center"} p={2}  >
+                    <SlideContent></SlideContent>
                     <Stack flexDirection={"row"} justifyContent={"center"}>
-                        <Box width={"600px"} display={"flex"} justifyContent={"center"}>
+                        <Box width={"650px"} display={"flex"} justifyContent={"center"}>
                             {
                                 urldoc ? <TextField fullWidth type="search" label="Search" sx={{ backgroundColor: "white", }} /> : <Button variant="outlined" color="White" sx={{ paddingX: "20px" }}>Contact us </Button>
                             }
