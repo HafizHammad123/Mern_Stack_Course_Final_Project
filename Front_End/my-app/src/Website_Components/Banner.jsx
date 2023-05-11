@@ -18,10 +18,11 @@ export default function Banner() {
         }}
         >   <Stack  height='100%' sx={{
             backgroundColor: '#000000b0',
+            position:'relative'
 
         }}>
                 <Header></Header>
-                <Stack height={"100%"} justifyContent={"center"} p={2}  >
+                <Stack height={"100%"} justifyContent={"center"}  p={2}  >
                     <SlideContent></SlideContent>
                     <Stack flexDirection={"row"} justifyContent={"center"}>
                         <Box width={"650px"} display={"flex"} justifyContent={"center"}>
