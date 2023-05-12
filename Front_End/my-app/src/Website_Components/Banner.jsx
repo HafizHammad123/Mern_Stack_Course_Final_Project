@@ -4,6 +4,7 @@ import SlideContent from "./Slide_Content";
 import { Stack, Button, TextField, Box } from '@mui/material'
 import Image from '../Website_Components/Images/Blogging.jpg'
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function Banner() {
     const [urldoc] = useState(document.URL === 'http://localhost:3000/Blogs')
     console.log(urldoc)
@@ -27,7 +28,9 @@ export default function Banner() {
                     <Stack flexDirection={"row"} justifyContent={"center"}>
                         <Box width={"650px"} display={"flex"} justifyContent={"center"}>
                             {
-                                urldoc ? <TextField fullWidth type="search" label="Search" sx={{ backgroundColor: "white", }} /> : <Button variant="outlined" color="White" sx={{ paddingX: "20px" }}>Contact us </Button>
+                                urldoc ? <TextField fullWidth type="search" label="Search" sx={{ backgroundColor: "white", }} /> :<Link to="/Contact_us">
+                                    <Button variant="outlined" color="White" sx={{ paddingX: "20px" }}>Contact us </Button>
+                                    </Link> 
                             }
 
 
