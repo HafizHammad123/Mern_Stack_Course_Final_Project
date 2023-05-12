@@ -11,7 +11,7 @@ export default function Banner() {
 
 
     return <>
-        <Stack height={"565px"} sx={{
+        <Stack height={"500px"} sx={{
             backgroundImage: `url(${Image})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
