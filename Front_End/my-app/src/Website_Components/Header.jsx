@@ -16,7 +16,7 @@ export default function Header() {
         <Stack  position={"fixed"} width={"100%"} zIndex={1} borderColor={"#ffffff45"}>
             <Stack p={1} flexDirection={"row"} sx={{ justifyContent: { md: "flex-start", xs: "space-between" }, backgroundColor: '#2324254f' }}>
 
-                <Box color="white" flex={3} display={"flex"} alignItems={"center"} fontFamily={"Raleway"}>Blogging</Box>
+                <Box color="white" flex={3} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} textTransform={"uppercase"}>Blog</Box>
                 <Box display={"flex"} justifyContent={"center"} flex={4} sx={{
                     display: { md: 'flex', xs: 'none' }
                 }}>
