@@ -2,7 +2,7 @@ import React from "react";
 import { Stack, Box } from "@mui/material";
 import { useState } from "react";
 
-export default function SlideContent() {
+export default function TypingContent() {
     const [Typing_Data, Update_Typing] = useState(" ")
 
     const string = "Content Writing Services"

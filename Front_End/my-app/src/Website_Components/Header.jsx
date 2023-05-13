@@ -4,46 +4,43 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 export default function Header() {
     const [list, update_list] = useState(false)
-    const Open_Nav=()=>
-    {
-        if(list)
-        {
+    const Open_Nav = () => {
+        if (list) {
             update_list(false)
         }
-        else 
-        {
+        else {
             update_list(true)
         }
     }
     return <>
-        <Stack p={1}  position={"fixed"} width={"100%"} zIndex={1} sx={{backgroundColor: '#2324254f'}} borderColor={"#ffffff45"}>
-            <Stack flexDirection={"row"} sx={{justifyContent:{md:"flex-start",xs:"space-between"}}}>
+        <Stack  position={"fixed"} width={"100%"} zIndex={1} borderColor={"#ffffff45"}>
+            <Stack p={1} flexDirection={"row"} sx={{ justifyContent: { md: "flex-start", xs: "space-between" }, backgroundColor: '#2324254f' }}>
 
                 <Box color="white" flex={3} display={"flex"} alignItems={"center"} fontFamily={"Raleway"}>Blogging</Box>
-                <Box display={"flex"} justifyContent={"center"}  flex={4} sx={{
-                    display: { md: 'flex',xs:'none' }
+                <Box display={"flex"} justifyContent={"center"} flex={4} sx={{
+                    display: { md: 'flex', xs: 'none' }
                 }}>
                     <Navbar></Navbar>
                 </Box>
                 <Box flex={1} display={"flex"} justifyContent={"center"} sx={{
-                    display: { md: 'flex',xs:'none' }
+                    display: { md: 'flex', xs: 'none' }
                 }}>
                     <Button color="White" sx={{ paddingX: '15px' }}>Sign up</Button>
                 </Box>
-                <Box  sx={{
-                    display: { md: 'none',xs:'block' }
+                <Box sx={{
+                    display: { md: 'none', xs: 'block' }
                 }}><IconButton onClick={Open_Nav}>
                         <ReorderIcon color="White" />
                     </IconButton></Box>
             </Stack>
 
-            <Stack flexDirection={"row"} justifyContent={"flex-end"} sx={{display:{md:"none"}}}>
+            <Stack sx={{ display: { md: "none" },backgroundColor: '#000000e8',color:"white"  }} position={"relative"} zIndex={4}>
                 {
                     list ? <Box display={"flex"} flexDirection={"column"}  alignItems={"center"}>
                         <Navbar></Navbar>
                         <Button color="White">Sign up</Button>
 
-                    </Box>:null 
+                    </Box> : null
                 }
             </Stack>
 

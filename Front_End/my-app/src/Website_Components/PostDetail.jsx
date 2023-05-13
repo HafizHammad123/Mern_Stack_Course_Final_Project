@@ -1,18 +1,20 @@
 import React from "react";
 import Banner from "./Banner";
 import Footer from "./Footer";
-import { Stack, Box, Typography, TextField, IconButton } from "@mui/material";
+import { Stack, Box, Typography, TextField, IconButton, Button } from "@mui/material";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { Link } from "react-router-dom";
+
 export default function PostDetail({ single_post_info }) {
-    console.log(single_post_info)
+
 
     return <>
         <Banner />
-        <Stack flexDirection={"row"} >
+        <Stack flexDirection={"row"} flexWrap={"wrap"} >
 
-            <Box flex={1} p={2} display={"flex"} flexDirection={"column"} fontFamily={"Raleway"} rowGap={2}>
+            <Box flex={"415px"} p={2} display={"flex"} flexDirection={"column"} fontFamily={"Raleway"} rowGap={2} >
                 {
                     single_post_info.map(Full_Detail =>
                     (
@@ -46,13 +48,16 @@ export default function PostDetail({ single_post_info }) {
 
 
                             </Box>
+                            <Link to={"/Blogs"}>
+                                <Button variant="contained" color="warning">Back </Button>
+                            </Link>
 
                         </>
                     ))
                 }
             </Box>
-            <Box flex={1} p={2} display={"flex"} justifyContent={"flex-end"}>
-                <Box width={"340px"} fontFamily={"Raleway"}>Related Post</Box>
+            <Box flex={"415px"} p={2} display={"flex"} sx={{ justifyContent: { md: "flex-end" } }}>
+                <Box sx={{ width: { md: "340px", xs: "100%" } }} fontFamily={"Raleway"} border={1} textAlign={"center"}>Related Post</Box>
             </Box>
 
         </Stack>

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import SlideContent from "./Slide_Content";
+import TypingContent from "./Typing_Content";
 import { Stack, Button, TextField, Box } from '@mui/material'
 import Image from '../Website_Components/Images/Blogging.jpg'
 import { useState } from "react";
@@ -23,7 +23,7 @@ export default function Banner() {
         }}>
                 <Header></Header>
                 <Stack height={"100%"} justifyContent={"center"}  p={2}  >
-                    <SlideContent></SlideContent>
+                    <TypingContent></TypingContent>
                     <Stack flexDirection={"row"} justifyContent={"center"}>
                         <Box width={"650px"} display={"flex"} justifyContent={"center"}>
                             {
