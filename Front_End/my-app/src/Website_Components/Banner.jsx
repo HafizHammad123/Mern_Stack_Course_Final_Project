@@ -6,8 +6,7 @@ import Image from '../Website_Components/Images/Blogging.jpg'
 import { useState } from "react";
 import { Link } from "react-router-dom";
 export default function Banner() {
-    const [urldoc] = useState(document.URL === 'http://localhost:3000/Blogs')
-    console.log(urldoc)
+    const [urldoc] = useState(document.URL === 'http://localhost:3000/Blogs' || document.URL==='http://localhost:3000/Post_Detail')
 
 
     return <>

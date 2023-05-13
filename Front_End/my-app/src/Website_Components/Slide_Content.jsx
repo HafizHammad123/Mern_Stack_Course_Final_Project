@@ -9,7 +9,7 @@ export default function SlideContent() {
     const covrt = string.split('')
     setTimeout(() => {
         typing()
-    }, 100)
+    }, 500)
     function typing() {
         for (let index = 0; index < Typing_Data.length; index++) {
             if (Typing_Data.length) {
