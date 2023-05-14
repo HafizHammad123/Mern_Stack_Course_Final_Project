@@ -6,7 +6,7 @@ import PostDetail from "./Website_Components/PostDetail";
 import Dashboard from "./Web_App_Pages/Dashboard";
 import MyBlogs from "./Web_App_Pages/MyBlogs";
 import Comments from "./Web_App_Pages/Comments";
-import Help from "./Web_App_Pages/Help.Jsx";
+import Help from "./Web_App_Pages/Help_Desk.jsx";
 import MyProfile from "./Web_App_Pages/MyProfile";
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import { useState } from "react";
@@ -17,7 +17,6 @@ function App() {
   return<>
   <BrowserRouter>
   <Routes>
-    {/* <Route element={<Layout/>}> */}
     <Route index element={<Home/>}/> 
     <Route path="/Blogs" element={<Blogs single_post={updateinfo}/>}/>
     <Route path="/Contact_us" element={<Contactus/>}/>
@@ -27,7 +26,6 @@ function App() {
     <Route path="/MyProfile" element={<MyProfile/>}/>
     <Route path="/Comments" element={<Comments/>}/>
     <Route path="/Help_Desk" element={<Help/>}/>
-    {/* </Route> */}
      </Routes>
   </BrowserRouter>
   

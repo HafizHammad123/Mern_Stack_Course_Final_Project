@@ -1,4 +1,56 @@
-#qadir
+#foot{
+    /* border: 2px solid green; */
+    font-family: Raleway;
+    background-color: #352e2e;
+    color: white;
+    padding: 15px;
+    
+    
+
+}
+#top{
+    /* border: 2px solid yellow; */
+    border-bottom: 1px solid white;
+    display: flex;
+    flex-wrap: wrap;
+}
+#bottom{
+    /* border: 2px solid firebrick; */
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.fotter_sections{
+    flex: 300px;
+}
+.fotter_section1{
+    flex: 600px;
+}
+li{
+    list-style: none;
+    display: flex;
+    gap:10px;
+}
+.footer_navbar
 {
-    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.fotter_sections h3
+{
+    display: flex;
+    justify-content: center;
+}
+.share
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.adress{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }

@@ -9,7 +9,7 @@ export default function TypingContent() {
     const covrt = string.split('')
     setTimeout(() => {
         typing()
-    }, 500)
+    }, 150)
     function typing() {
         for (let index = 0; index < Typing_Data.length; index++) {
             if (Typing_Data.length) {

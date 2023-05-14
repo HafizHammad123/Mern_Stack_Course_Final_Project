@@ -7,7 +7,6 @@ export default function Contactus()
 {
     return <>
     <Banner></Banner>
-    <Footer></Footer>
     <Stack sx={{flexDirection:{md:"row",xs:"column"},alignItems:{md:"center",xs:"stretch"}}}>
         <Stack display={"flex"} flexDirection={"column"} rowGap={3} flex={1} sx={{padding:{xs:"5px",sm:"25px"}}}  component={"form"}>
             <TextField label={"Enter Name"} variant="outlined"  required  sx={{backgroundColor:"#000000d6",
@@ -26,7 +25,7 @@ color:"white"
             "& input":{
                 color:"white"
                         }}}></TextField>
-            <TextField label={"Type Message"} multiline rows={3} required   sx={{backgroundColor:"#000000d6",
+            <TextField label={"Type Message"} multiline rows={4} required   sx={{backgroundColor:"#000000d6",
             "& label":{
     color:"white"
             },
@@ -41,5 +40,6 @@ color:"white"
 
         </Stack>
     </Stack>
+    <Footer></Footer>
     </>
 }

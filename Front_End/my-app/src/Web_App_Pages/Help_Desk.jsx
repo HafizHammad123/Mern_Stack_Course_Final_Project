@@ -4,7 +4,7 @@ import SideNavWebApp from "../Web_App_Components/Side_Navbar";
 import FooterWebApp from "../Web_App_Components/Footer_WebApp";
 import { Stack } from '@mui/material'
 export default function Help() {
-    return <>
+    return<>
         <HeaderWebApp></HeaderWebApp>
         <Stack>
             <SideNavWebApp></SideNavWebApp>
