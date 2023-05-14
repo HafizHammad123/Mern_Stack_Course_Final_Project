@@ -18,7 +18,7 @@ export default function HeaderWebApp() {
         <AppBar position="static" >
             <Toolbar>
                 <Box flex={1}>
-                    <Typography variant="h6" textTransform={"uppercase"}>Blog</Typography>
+                    <Typography variant="h6" textTransform={"uppercase"}><i class="fa-solid fa-blog"></i> Blog</Typography>
                 </Box>
 
                 <Box flex={1} fontFamily={"Arial"} display={"flex"} justifyContent={"flex-end"} columnGap={3} alignItems={"center"}>
