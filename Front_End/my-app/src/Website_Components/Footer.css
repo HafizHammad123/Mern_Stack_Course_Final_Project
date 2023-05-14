@@ -1,62 +1,119 @@
-#foot{
-    /* border: 2px solid green; */
+#foot {
     font-family: Raleway;
-    background-color: #352e2e;
+    background-color: #06150bbf;
     color: white;
-    padding: 15px;
     background-image: url('../Website_Components/Images/footer.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
-    background-blend-mode: overlay;
+    background-blend-mode:color-burn;
     background-attachment: fixed;
-    
-    
-
-}
-#top{
-    /* border: 2px solid yellow; */
-    border-bottom: 1px solid white;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
-#bottom{
-    /* border: 2px solid firebrick; */
-    display:flex;
+
+#top {
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
-.fotter_sections{
+
+#bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.fotter_sections {
     flex: 300px;
+    padding: 25px 15px;
 }
-.fotter_section1{
-    flex: 600px;
+
+.fotter_section1 {
+    flex: 300px;
+    padding: 25px 15px;
 }
-li{
+
+li {
     list-style: none;
     display: flex;
-    gap:10px;
-}
-.footer_navbar
-{
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-.fotter_sections h3
-{
-    display: flex;
-    justify-content: center;
-}
-.share
-{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 10px;
 }
-.adress{
+
+.footer_navbar {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 0px;
+}
+
+.fotter_sections h3 {
+    display: flex;
+    justify-content: center;
+}
+
+.share {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0px;
+}
+
+.share li {
+    display: block;
+    padding: 10px 15px;
+}
+
+.adress {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
+    padding: 0px;
+    align-items: center;
+}
+
+@media screen and (max-width:768px) {
+
+
+    .adress li {
+        display: flex;
+        justify-content: center;
+    }
+
+    #copyright {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .fotter_sections {
+        width: 100%;
+    }
+
+    .fotter_section1 {
+        width: 100%;
+    }
+
+    .adress li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer_navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .share {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
