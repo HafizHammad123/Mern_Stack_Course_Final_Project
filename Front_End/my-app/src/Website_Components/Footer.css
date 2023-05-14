@@ -4,6 +4,12 @@
     background-color: #352e2e;
     color: white;
     padding: 15px;
+    background-image: url('../Website_Components/Images/footer.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-blend-mode: overlay;
+    background-attachment: fixed;
     
     
 
