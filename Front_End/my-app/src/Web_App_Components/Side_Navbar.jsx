@@ -7,30 +7,32 @@ import { Link } from 'react-router-dom'
 import React from "react";
 export default function SideNavWebApp() {
     return <>
-        <Box  sx={{ display: { md: "block", xs: "none" } }}>
-            <List >
-                <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1 } }}>
+        <Box flex={1} sx={{ display: { md: "block", xs: "none",backgroundColor:"#ebebeb" }}} >
+            <Box position={"fixed"} sx={{backgroundColor:"#ebebeb"}} >
+
+            <List sx={{"li":{paddingX:"5px"}}} >
+                <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1} }}>
                     <Link to={"/Dashboard"}>
                         <ListItemButton>
                             <ListItemIcon>
                                 <DashboardIcon />
                             </ListItemIcon>
-                            <ListItemText  >
-                                <Typography variant="h6" color={"black"}>DashBoard</Typography>
+                            <ListItemText primary="DashBoard" sx={{"span":{color:"black",fontFamily:"Raleway",fontWeight:"600",textTransform:"uppercase"}}} >
+                               
                             </ListItemText>
                         </ListItemButton>
                     </Link>
                 </ListItem>
 
-                <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1 } }}>
+                <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1} }}>
                     <Link to={"/MyBlogs"}>
                         <ListItemButton>
 
                             <ListItemIcon>
                                 <i class="fa-solid fa-blog"></i>
                             </ListItemIcon>
-                            <ListItemText>
-                                <Typography variant="h6" color={"black"}>My Blogs</Typography>
+                            <ListItemText primary="My Blogs" sx={{"span":{color:"black",fontFamily:"Raleway",fontWeight:"600",textTransform:"uppercase"}}}>
+                                
                             </ListItemText>
                         </ListItemButton>
                     </Link>
@@ -42,8 +44,8 @@ export default function SideNavWebApp() {
                             <ListItemIcon>
                                 <CommentIcon />
                             </ListItemIcon>
-                            <ListItemText >
-                                <Typography variant="h6" color={"black"}>Comments</Typography>
+                            <ListItemText primary="Comments" sx={{"span":{color:"black",fontFamily:"Raleway",fontWeight:"600",textTransform:"uppercase"}}}>
+                                
                             </ListItemText>
                         </ListItemButton>
                     </Link>
@@ -55,8 +57,7 @@ export default function SideNavWebApp() {
                             <ListItemIcon>
                                 <HelpIcon />
                             </ListItemIcon>
-                            <ListItemText  >
-                                <Typography variant="h6" color={"black"} >Help Desk</Typography>
+                            <ListItemText  primary="Help Desk" sx={{"span":{color:"black",fontFamily:"Raleway",fontWeight:"600",textTransform:"uppercase"}}}>
                             </ListItemText>
                         </ListItemButton>
                     </Link>
@@ -72,6 +73,7 @@ export default function SideNavWebApp() {
                     </ListItemButton>
                 </ListItem>
             </List>
+            </Box>
         </Box>
     </>
 }

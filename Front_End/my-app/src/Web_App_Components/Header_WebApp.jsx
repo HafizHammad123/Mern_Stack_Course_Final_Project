@@ -15,8 +15,8 @@ export default function HeaderWebApp() {
 
     }
     return <>
-        <AppBar position="static" >
-            <Toolbar>
+        <AppBar position="sticky" >
+            <Toolbar >
                 <Box flex={1}>
                     <Typography variant="h6" textTransform={"uppercase"}><i class="fa-solid fa-blog"></i> Blog</Typography>
                 </Box>
