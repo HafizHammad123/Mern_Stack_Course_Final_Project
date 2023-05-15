@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import React from "react";
 export default function SideNavWebApp() {
     return <>
-        <Box  border={1} color={"black"} sx={{ display: { md: "block", xs: "none" } }}>
+        <Box  sx={{ display: { md: "block", xs: "none" } }}>
             <List >
                 <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1 } }}>
                     <Link to={"/Dashboard"}>
