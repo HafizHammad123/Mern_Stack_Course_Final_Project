@@ -8,7 +8,7 @@ import React from "react";
 export default function SideNavWebApp() {
     return <>
         <Box   flex={1} sx={{ display: { md: "block", xs: "none",}}} >
-            <Box position={"fixed"} sx={{backgroundColor:"#ebebeb"}} >
+            <Box position={"fixed"} sx={{backgroundColor:"white"}} >
 
             <List sx={{"li":{paddingX:"0px"}}} >
                 <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1} }}>
