@@ -6,7 +6,7 @@ import NavbarMobileWeb from "../Web_App_Components/Navbar_Mobile";
 import { Stack, Box, TextField, Avatar, Typography, Button } from '@mui/material'
 import ShowUserOwnBlogs from "../Web_App_Components/Show_User_Blogs";
 import RightBar from "../Web_App_Components/Right_Bar";
-import BlogForm from "../Web_App_Components/BlogForm";
+import Form from "../Form/Form";
 import Modal from '@mui/material/Modal';
 
 export default function MyBlogs() {
@@ -28,7 +28,7 @@ export default function MyBlogs() {
         p: 3,
         display: "flex",
         flexDirection: "column",
-        gap:"15px"
+        gap: "15px"
     };
 
     return <>
@@ -53,12 +53,12 @@ export default function MyBlogs() {
                                 <Typography variant="h5" display={"flex"} justifyContent={"center"} fontFamily={"Raleway"} fontWeight={"600"} >
                                     Create Post
                                 </Typography>
-                                <BlogForm label={"Author Name"}/>
-                                <BlogForm label={"Title"}/>
-                                <BlogForm label={"Description"}/>
-                                <TextField type="file" ></TextField>
-                                <Button variant="contained" color="secondary" sx={{alignSelf:"flex-end"}}>Publish Post</Button>
-                                
+                                <Form label={"Author Name"} />
+                                <Form label={"Title"} />
+                                <Form label={"Description"} />
+                                <Form type={"file"} />
+                                <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }}>Publish Post</Button>
+
 
 
 
@@ -73,6 +73,7 @@ export default function MyBlogs() {
                 </Box>
 
             </Stack>
+            
             <Box fontFamily={"Raleway"} sx={{ backgroundColor: "white", flex: { lg: "2", md: "2", sm: "3" } }}>
                 <RightBar />
             </Box>

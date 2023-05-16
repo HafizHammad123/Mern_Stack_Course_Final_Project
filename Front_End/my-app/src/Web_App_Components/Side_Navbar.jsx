@@ -31,7 +31,7 @@ export default function SideNavWebApp() {
                             <ListItemIcon>
                                 <i class="fa-solid fa-blog"></i>
                             </ListItemIcon>
-                            <ListItemText primary="My Blogs" sx={{"span":{color:"black",fontFamily:"Raleway",fontWeight:"600",textTransform:"uppercase"}}}>
+                            <ListItemText primary="My Post" sx={{"span":{color:"black",fontFamily:"Raleway",fontWeight:"600",textTransform:"uppercase"}}}>
                                 
                             </ListItemText>
                         </ListItemButton>
