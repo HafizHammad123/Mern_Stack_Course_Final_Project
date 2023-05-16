@@ -10,7 +10,7 @@ export default function Dashboard() {
         <NavbarMobileWeb />
         <Stack flexDirection={"row"}>
             <SideNavWebApp />
-            <Box flex={4} border={1}></Box>
+            <Box flex={4} border={1}>hello</Box>
         </Stack>
         <FooterWebApp />
     </>

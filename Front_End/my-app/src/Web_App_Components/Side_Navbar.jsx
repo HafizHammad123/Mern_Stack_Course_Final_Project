@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch, Typography } from "@mui/material";
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch} from "@mui/material";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CommentIcon from '@mui/icons-material/Comment';
 import HelpIcon from '@mui/icons-material/Help';
@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom'
 import React from "react";
 export default function SideNavWebApp() {
     return <>
-        <Box flex={1} sx={{ display: { md: "block", xs: "none",backgroundColor:"#ebebeb" }}} >
+        <Box   flex={1} sx={{ display: { md: "block", xs: "none",}}} >
             <Box position={"fixed"} sx={{backgroundColor:"#ebebeb"}} >
 
-            <List sx={{"li":{paddingX:"5px"}}} >
+            <List sx={{"li":{paddingX:"0px"}}} >
                 <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1} }}>
                     <Link to={"/Dashboard"}>
                         <ListItemButton>
