@@ -1,0 +1,21 @@
+.aq{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: white;
+    
+    
+}
+button{
+background-color: skyblue;
+border-radius: 3px;
+align-self:flex-end;
+margin:2px 2px;
+padding: 2px 2px;
+}
+.g{
+text-align: center;
+}
+.g::placeholder{
+    color: blue;
+}
