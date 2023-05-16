@@ -5,6 +5,7 @@ import FooterWebApp from "../Web_App_Components/Footer_WebApp";
 import NavbarMobileWeb from "../Web_App_Components/Navbar_Mobile";
 import { Stack, Box, TextField, Avatar, Typography } from '@mui/material'
 import ShowUserOwnBlogs from "../Web_App_Components/Show_User_Blogs";
+import RightBar from "../Web_App_Components/Right_Bar";
 import Modal from '@mui/material/Modal';
 import { useActionData, useLinkClickHandler } from "react-router-dom";
 
@@ -33,7 +34,7 @@ export default function MyBlogs() {
         <Stack flexDirection={"row"}  >
             <SideNavWebApp />
             <Stack sx={{ paddingX: { md: "0px", xs: "15px" } }} paddingY={2} spacing={2} flex={4} alignItems={"center"} >
-                <Box sx={{ width: { lg: "540px", md: "460px" } }} display={"flex"} flexDirection={"column"} gap={2}>
+                <Box sx={{ width: { lg: "540px", md: "380px" } }} display={"flex"} flexDirection={"column"} gap={2}>
 
                     <TextField label="Search" type={"search"} />
                     <Stack flexDirection={"row"} gap={1}>
@@ -59,8 +60,8 @@ export default function MyBlogs() {
                 </Box>
 
             </Stack>
-            <Box fontFamily={"Raleway"} p={2} sx={{ backgroundColor: "#ebebeb", flex: { lg: "2", md: "1", sm: "2" } }}>
-                Right Bar
+            <Box  fontFamily={"Raleway"}  sx={{ backgroundColor: "white", flex: { lg: "2", md: "2", sm: "3" } }}>
+                <RightBar/>
             </Box>
         </Stack>
 
