@@ -48,7 +48,7 @@ export default function MyBlogs() {
                             <Box sx={style}>
                             <Typography variant="h5" display={"flex"} justifyContent={"center"} border={1}>Blogs Post Form</Typography>
                             <div>
-                                form
+                                form abdul qadir
                             </div>
                             </Box>
                         </Modal>
