@@ -8,6 +8,7 @@ import ShowUserOwnBlogs from "../Web_App_Components/Show_User_Blogs";
 import RightBar from "../Web_App_Components/Right_Bar";
 import Modal from '@mui/material/Modal';
 import { useActionData, useLinkClickHandler } from "react-router-dom";
+import'./myblogform.css'
 
 export default function MyBlogs() {
     const [open, setopen] = useState(false)
@@ -48,9 +49,14 @@ export default function MyBlogs() {
                         >
                             <Box sx={style}>
                             <Typography variant="h5" display={"flex"} justifyContent={"center"} border={1}>Blogs Post Form</Typography>
-                            <div>
-                                form abdul qadir 
-                            </div>
+                        <div className="aq">
+<input class="g" type="text"  placeholder="Author Name"/>
+<input class="g" type="text" placeholder="Title"/>
+<input class="g" type="text" placeholder="description"/>
+<input class="g" type="text" placeholder="Upload Image"/>
+<button>Publish Blog</button>
+
+                        </div>
                             </Box>
                         </Modal>
                     </Stack>
