@@ -6,10 +6,13 @@ import NavbarMobileWeb from "../Web_App_Components/Navbar_Mobile";
 import { Stack } from '@mui/material'
 export default function MyProfile() {
     return <>
-        <HeaderWebApp />
+       <HeaderWebApp />
         <NavbarMobileWeb />
-        <Stack>
+        <Stack flexDirection={"row"} justifyContent={"center"}>
             <SideNavWebApp />
+            <Stack  fontFamily={"Raleway"} sx={{ width: { lg: "550px", md: "400px" } }} border={1}>
+                My Profile
+            </Stack>
         </Stack>
         <FooterWebApp />
     </>

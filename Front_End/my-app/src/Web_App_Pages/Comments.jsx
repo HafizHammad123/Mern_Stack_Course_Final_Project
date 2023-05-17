@@ -8,8 +8,11 @@ export default function Comments() {
     return <>
         <HeaderWebApp />
         <NavbarMobileWeb />
-        <Stack>
+        <Stack flexDirection={"row"} justifyContent={"center"}>
             <SideNavWebApp />
+            <Stack fontFamily={"Raleway"} sx={{ width: { lg: "550px", md: "400px" } }} border={1}>
+                Comments
+            </Stack>
         </Stack>
         <FooterWebApp />
     </>

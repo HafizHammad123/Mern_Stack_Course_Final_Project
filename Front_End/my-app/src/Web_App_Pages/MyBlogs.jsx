@@ -5,11 +5,11 @@ import FooterWebApp from "../Web_App_Components/Footer_WebApp";
 import NavbarMobileWeb from "../Web_App_Components/Navbar_Mobile";
 import { Stack, Box, TextField, Avatar, Typography, Button } from '@mui/material'
 import ShowUserOwnBlogs from "../Web_App_Components/Show_User_Blogs";
-import RightBar from "../Web_App_Components/Right_Bar";
 import Form from "../Form/Form";
 import Modal from '@mui/material/Modal';
 
 export default function MyBlogs() {
+
     const [open, setopen] = useState(false)
     const OpenModal = () => {
         setopen(true)
@@ -23,6 +23,7 @@ export default function MyBlogs() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 500,
+        maxWidth: "100%",
         bgcolor: 'background.paper',
         boxShadow: 24,
         p: 3,
@@ -34,10 +35,13 @@ export default function MyBlogs() {
     return <>
         <HeaderWebApp />
         <NavbarMobileWeb />
-        <Stack flexDirection={"row"}  >
+        <Stack flexDirection={"row"} sx={{ justifyContent: { md: "flex-end" } }}  >
             <SideNavWebApp />
-            <Stack sx={{ paddingX: { md: "0px", xs: "15px" } }} paddingY={2} spacing={2} flex={4} alignItems={"center"} >
-                <Box sx={{ width: { lg: "540px", md: "380px" } }} display={"flex"} flexDirection={"column"} gap={2}>
+            <Stack sx={{ width: { lg: "80%", md: "75%", xs: "100%" } }}  >
+
+
+                <Stack display={"flex"} flexDirection={"column"} gap={2} paddingY={"10px"} paddingX={"10px"}>
+
 
                     <TextField label="Search" type={"search"} />
                     <Stack flexDirection={"row"} gap={1}>
@@ -53,6 +57,7 @@ export default function MyBlogs() {
                                 <Typography variant="h5" display={"flex"} justifyContent={"center"} fontFamily={"Raleway"} fontWeight={"600"} >
                                     Create Post
                                 </Typography>
+
                                 <Form label={"Author Name"} />
                                 <Form label={"Title"} />
                                 <Form label={"Description"} />
@@ -67,16 +72,17 @@ export default function MyBlogs() {
                             </Box>
                         </Modal>
                     </Stack>
-                    <Box display={"flex"} flexDirection={"column"} gap={3}>
+                    <Box display={"flex"} flexDirection={"row"} gap={3} flexWrap={"wrap"}>
                         <ShowUserOwnBlogs />
                     </Box>
-                </Box>
+
+
+                </Stack>
+
+
+                {/* <RightBar  /> */}
 
             </Stack>
-            
-            <Box fontFamily={"Raleway"} sx={{ backgroundColor: "white", flex: { lg: "2", md: "2", sm: "3" } }}>
-                <RightBar />
-            </Box>
         </Stack>
         <FooterWebApp />
     </>

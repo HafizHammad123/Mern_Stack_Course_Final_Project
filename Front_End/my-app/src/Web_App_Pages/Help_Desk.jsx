@@ -8,8 +8,11 @@ export default function Help() {
     return <>
         <HeaderWebApp />
         <NavbarMobileWeb />
-        <Stack>
+        <Stack flexDirection={"row"} justifyContent={"center"}>
             <SideNavWebApp />
+            <Stack  fontFamily={"Raleway"} sx={{ width: { lg: "550px", md: "400px" } }} border={1}>
+                Help Desk
+            </Stack>
         </Stack>
         <FooterWebApp />
     </>

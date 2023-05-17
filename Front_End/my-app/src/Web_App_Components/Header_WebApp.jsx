@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Box, Badge, Avatar, Menu, MenuItem } from 
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
 import UserPic from '../Web_App_Components/Images/hammad.jpeg'
+import { Link } from "react-router-dom";
 export default function HeaderWebApp() {
     const [Open, SetOpen] = useState(false)
     const OpenProfile = () => {
@@ -43,7 +44,7 @@ export default function HeaderWebApp() {
                                 horizontal: 'right',
                             }}
                         >
-                            <MenuItem >Profile</MenuItem>
+                            <MenuItem sx={{"a":{color:"black",textDecoration:"none"}}}><Link to={"/MyProfile"} >Profile</Link></MenuItem>
                             <MenuItem >My account</MenuItem>
                             <MenuItem >Logout</MenuItem>
                         </Menu> : null

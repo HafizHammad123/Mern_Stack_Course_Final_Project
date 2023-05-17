@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom'
 import React from "react";
 export default function SideNavWebApp() {
     return <>
-        <Box   flex={1} sx={{ display: { md: "block", xs: "none",}}} >
-            <Box position={"fixed"} sx={{backgroundColor:"white"}} >
+        <Box  height={"100vh"} position={"fixed"}  sx={{ display: { md: "block", xs: "none",},backgroundColor:"#e3e3e3",zIndex:"10",left:"0px",width:{lg:"250px",md:"230px"}}} >
+            
 
-            <List sx={{"li":{paddingX:"0px"}}} >
+            <List sx={{"li":{paddingX:"0x"}}} >
                 <ListItem sx={{ "a": { textDecoration: "none", flexGrow: 1} }}>
                     <Link to={"/Dashboard"}>
                         <ListItemButton>
@@ -73,7 +73,7 @@ export default function SideNavWebApp() {
                     </ListItemButton>
                 </ListItem>
             </List>
-            </Box>
+          
         </Box>
     </>
 }
