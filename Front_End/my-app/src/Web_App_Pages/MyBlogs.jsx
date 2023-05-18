@@ -57,12 +57,13 @@ export default function MyBlogs() {
                                 <Typography variant="h5" display={"flex"} justifyContent={"center"} fontFamily={"Raleway"} fontWeight={"600"} >
                                     Create Post
                                 </Typography>
-
-                                <Form label={"Author Name"} />
-                                <Form label={"Title"} />
-                                <Form label={"Description"} />
-                                <Form type={"file"} />
-                                <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }}>Publish Post</Button>
+                                <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2}>
+                                    <Form label={"Author Name"} />
+                                    <Form label={"Title"} />
+                                    <Form label={"Description"} />
+                                    <Form type={"file"} />
+                                </Box>
+                                <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Publish Post</Button>
 
 
 
@@ -80,7 +81,6 @@ export default function MyBlogs() {
                 </Stack>
 
 
-                {/* <RightBar  /> */}
 
             </Stack>
         </Stack>
