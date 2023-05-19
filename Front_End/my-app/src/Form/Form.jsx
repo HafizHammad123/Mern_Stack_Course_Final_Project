@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import {useDispatch} from 'react-redux'
-import { Change } from '../Redux/Blogs/BlogFormreducer'
+import { Change } from '../Redux/BlogsReducers/BlogFormreducer1'
 export default function Form({ label, type,value,name }) {
     const dispatch=useDispatch()
 

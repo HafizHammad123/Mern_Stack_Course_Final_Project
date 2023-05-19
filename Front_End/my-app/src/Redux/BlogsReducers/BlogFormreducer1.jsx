@@ -18,5 +18,4 @@ export const BlogFormReducer = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { Change } = BlogFormReducer.actions
-
 export default BlogFormReducer.reducer

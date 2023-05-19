@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import PostReducer from './Blogs/BlogFormreducer'
+import PostReducer from './BlogsReducers/BlogFormreducer1'
+import Signupreducer from './SignupReducers/SignupFormReducer'
 
-export const Store=configureStore({
+export const  Store=configureStore({
   reducer: {
-    BlogForm:PostReducer
+    BlogForm:PostReducer,
+    Signup:Signupreducer
   },
 })
