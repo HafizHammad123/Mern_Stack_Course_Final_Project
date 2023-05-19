@@ -9,7 +9,9 @@ import Signin from "../Auth/Signin";
 import { useSelector } from "react-redux";
 export default function Header() {
     const Signupformstate=useSelector((state)=>state.Signup)
-    const {Name,Email,Password}=Signupformstate
+    const LoginFormState=useSelector((state)=>state.Login)
+    const {NameSignup,EmailSignup,PasswordSignup}=Signupformstate
+    const {Emailsignin,Passwordsignin}=LoginFormState
     const [list, update_list] = useState(false)
     const [open, setopen] = useState(false)
     const [sign, update_sign] = useState(true)
@@ -47,7 +49,7 @@ export default function Header() {
         <Stack position={"fixed"} width={"100%"} zIndex={1} borderColor={"#ffffff45"}>
             <Stack p={1} flexDirection={"row"} sx={{ justifyContent: { md: "flex-start", xs: "space-between" }, backgroundColor: '#2324254f' }}>
 
-                <Box color="white" flex={3} display={"flex"} alignItems={"center"} gap={1} fontFamily={"Raleway"} textTransform={"uppercase"}><i class="fa-solid fa-blog"></i> Blog {Name}{Email}{Password}</Box>
+                <Box color="white" flex={3} display={"flex"} alignItems={"center"} gap={1} fontFamily={"Raleway"} textTransform={"uppercase"}><i class="fa-solid fa-blog"></i> Blog {NameSignup}{EmailSignup}{PasswordSignup}{Emailsignin}{Passwordsignin}</Box>
                 <Box display={"flex"} justifyContent={"center"} flex={4} sx={{
                     display: { md: 'flex', xs: 'none' }
                 }}>
@@ -76,8 +78,8 @@ export default function Header() {
                                             Sign in
                                         </Typography>
                                         <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} id={"Signin"}>
-                                        <Signin label={"Email Sign in"} type={"email"} />
-                                        <Signin label={"password Sign in"} type={"password"} />
+                                        <Signin label={"Email Sign in"} type={"email"} name={"Emailsignin"} value={Emailsignin}/>
+                                        <Signin label={"password Sign in"} type={"password"} name={"Passwordsignin"} value={Passwordsignin} />
                                         </Box>
                                         <Button variant="contained" form="Signin" type="submit">Sign in</Button>
                                         <Box display={"flex"} gap={1} sx={{ flexDirection: { sm: "row", xs: "column" } }} justifyContent={"space-between"}>
@@ -95,9 +97,9 @@ export default function Header() {
                                             sign up
                                         </Typography>
                                         <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} id={"Signup"}>
-                                        <Signup label={"Name Sign up"} value={Name} name={"Name"}/>
-                                        <Signup label={"Email Sign up"} value={Email} name={"Email"} type={"email"} />
-                                        <Signup label={"password Sign up"} value={Password} name={"Password"} type={"password"} />
+                                        <Signup label={"Name Sign up"} value={NameSignup} name={"NameSignup"}/>
+                                        <Signup label={"Email Sign up"} value={EmailSignup} name={"EmailSignup"} type={"email"} />
+                                        <Signup label={"password Sign up"} value={PasswordSignup} name={"PasswordSignup"} type={"password"} />
                                         </Box>
                                         <Button variant="contained" type="submit" form={"Signup"} >Sign up</Button>
                                         <Button variant="contained" startIcon={<GoogleIcon />}>Sign up with Google</Button>

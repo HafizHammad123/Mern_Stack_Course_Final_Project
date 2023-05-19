@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { ChangeData } from "../Redux/SignupReducers/SignupFormReducer";
+import { ChangeData } from "../Redux/AuthReducers/SignupFormReducer";
 export default function Signup({label,type,value,name})
 {
     const dispatch=useDispatch()

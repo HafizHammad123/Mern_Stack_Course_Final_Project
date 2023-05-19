@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const SignupReducer = createSlice({
     name: "Signup",
     initialState: {
-        Name:"",
-        Email: "",
-        Password: ""
+        NameSignup:"",
+        EmailSignup: "",
+        PasswordSignup: ""
     },
     reducers: {
         ChangeData: (state,action) =>
