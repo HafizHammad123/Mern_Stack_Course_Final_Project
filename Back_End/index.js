@@ -7,9 +7,16 @@ app.use(cors())
 
 // Create Api Here
 
-// signup api
+// signup Api
 
 app.put('/User_Signup',(req,res)=>
+{
+
+})
+
+// signin Api
+
+app.post('/User_Signin',(req,res)=>
 {
 
 })
@@ -28,9 +35,26 @@ app.delete('/User_DeletePost',(req,res)=>
     
 })
 
+// User Blog Post Update Api
 
+app.post("/User_UpdatePost",(req,res)=>
+{
 
+})
 
+// Fetch User personal blogs
+
+app.get("/Fetch_UserPersonalBlog",(req,res)=>
+{
+
+})
+
+// Fetch All Blogs of users
+
+app.get("/Fetch_UserAllBlogs",(req,res)=>
+{
+
+})
 
 
 app.listen(8000,()=>
