@@ -1,8 +1,12 @@
 import { Box, TextField } from "@mui/material";
-export default function Form({ label, type, }) {
+import {useDispatch} from 'react-redux'
+import { Change } from '../Redux/Blogs/BlogFormreducer'
+export default function Form({ label, type,value,name }) {
+    const dispatch=useDispatch()
+
     return <>
         <Box>
-            <TextField label={label} type={type} fullWidth sx={{ "label": { fontFamily: "Raleway", fontWeight: "500" } }} required>
+            <TextField name={name} value={value} label={label} type={type} fullWidth sx={{ "label": { fontFamily: "Raleway", fontWeight: "500" } }} required onChange={(e)=>dispatch(Change({[e.target.name]:e.target.value}))}>
             </TextField>
         </Box>
     </>

@@ -7,9 +7,12 @@ import { Stack, Box, TextField, Avatar, Typography, Button } from '@mui/material
 import ShowUserOwnBlogs from "../Web_App_Components/Show_User_Blogs";
 import Form from "../Form/Form";
 import Modal from '@mui/material/Modal';
+import { useSelector } from "react-redux";
+
 
 export default function MyBlogs() {
-
+    const BlogFieldData=useSelector((state)=>state.BlogForm)
+    const {AuthorName,Title,Description,Img}=BlogFieldData
     const [open, setopen] = useState(false)
     const OpenModal = () => {
         setopen(true)
@@ -35,6 +38,9 @@ export default function MyBlogs() {
     return <>
         <HeaderWebApp />
         <NavbarMobileWeb />
+        <Box>{AuthorName}</Box>
+        <Box>{Title}</Box>
+        <Box>{Description}</Box>
         <Stack flexDirection={"row"} sx={{ justifyContent: { md: "flex-end" } }}  >
             <SideNavWebApp />
             <Stack sx={{ width: { lg: "80%", md: "75%", xs: "100%" } }}  >
@@ -58,10 +64,10 @@ export default function MyBlogs() {
                                     Create Post
                                 </Typography>
                                 <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2}>
-                                    <Form label={"Author Name"} />
-                                    <Form label={"Title"} />
-                                    <Form label={"Description"} />
-                                    <Form type={"file"} />
+                                    <Form label={"Author Name"} value={AuthorName} name={'AuthorName'}/>
+                                    <Form label={"Title"} value={Title} name={'Title'} />
+                                    <Form label={"Description"} value={Description} name={'Description'} />
+                                    <Form type={"file"} value={Img} name={'Img'}/>
                                 </Box>
                                 <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Publish Post</Button>
 
