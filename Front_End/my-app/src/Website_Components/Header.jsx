@@ -6,15 +6,71 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Signup from "../Auth/Signup";
 import Signin from "../Auth/Signin";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch} from "react-redux";
+import { Resetdata } from "../Redux/AuthReducers/SignupFormReducer";
 export default function Header() {
-    const Signupformstate=useSelector((state)=>state.Signup)
-    const LoginFormState=useSelector((state)=>state.Login)
-    const {NameSignup,EmailSignup,PasswordSignup}=Signupformstate
-    const {Emailsignin,Passwordsignin}=LoginFormState
+    const Dispatch=useDispatch()
+    const Signupformstate = useSelector((state) => state.Signup)
+    const LoginFormState = useSelector((state) => state.Login)
+    const { NameSignup, EmailSignup, PasswordSignup } = Signupformstate
+    const { Emailsignin, Passwordsignin } = LoginFormState
     const [list, update_list] = useState(false)
     const [open, setopen] = useState(false)
     const [sign, update_sign] = useState(true)
+    const [focusState,setfocus]=useState(false)
+    const [Record_Insert,Update_Insert]=useState(false)
+
+    const SubmitSignup = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await fetch("http://localhost:8000/User/Signup",
+            {
+                method: "POST",
+                body: JSON.stringify(Signupformstate),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }
+        )
+        const actual_res=await response.json()
+        if(actual_res.message==="Successfully inserted record")
+        {
+          Dispatch(Resetdata())  
+          setfocus(false)
+          update_sign(true)
+          Update_Insert(true)
+          setTimeout(() => {
+            Update_Insert(false)
+          }, 1500);
+        }
+        else
+        {
+            alert(actual_res.message)
+            setfocus(true)
+
+
+        }
+            
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
+    const SubmitSignin=async (e)=>
+    {
+        e.preventDefault()
+        fetch("http://localhost:8000/User/Signin",
+        {
+            method:"post",
+            body:JSON.stringify(LoginFormState),
+            headers:{
+                "Content-Type": "application/json",
+
+            }
+        }
+        )
+
+    }
     const Open_Nav = () => {
         if (list) {
             update_list(false)
@@ -48,8 +104,12 @@ export default function Header() {
     return <>
         <Stack position={"fixed"} width={"100%"} zIndex={1} borderColor={"#ffffff45"}>
             <Stack p={1} flexDirection={"row"} sx={{ justifyContent: { md: "flex-start", xs: "space-between" }, backgroundColor: '#2324254f' }}>
-
-                <Box color="white" flex={3} display={"flex"} alignItems={"center"} gap={1} fontFamily={"Raleway"} textTransform={"uppercase"}><i class="fa-solid fa-blog"></i> Blog {NameSignup}{EmailSignup}{PasswordSignup}{Emailsignin}{Passwordsignin}</Box>
+{
+    Record_Insert ?  <Box position={"absolute"} zIndex={"12000"} border={1} color={"black"} fontFamily={"Raleway"} p={2} left={"50%"} sx={{   transform: 'translate(-50%)',backgroundColor:"white"}} >Successfully inserted record</Box>
+    :null
+}
+               
+                <Box color="white" flex={3} display={"flex"} alignItems={"center"} gap={1} fontFamily={"Raleway"} textTransform={"uppercase"}><i class="fa-solid fa-blog"></i> Blog </Box>
                 <Box display={"flex"} justifyContent={"center"} flex={4} sx={{
                     display: { md: 'flex', xs: 'none' }
                 }}>
@@ -59,7 +119,7 @@ export default function Header() {
                     display: { md: 'flex', xs: 'none' }
                 }}>
                     <Button color="White" sx={{ paddingX: '15px' }} onClick={() => openAuthModal()}>Sign in</Button>
-                 
+
                     <Modal
                         open={open}
                         onClose={handleClose}
@@ -77,9 +137,9 @@ export default function Header() {
                                         <Typography variant="h5" display={"flex"} justifyContent={"center"} fontWeight={"400"} textTransform={"capitalize"}>
                                             Sign in
                                         </Typography>
-                                        <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} id={"Signin"}>
-                                        <Signin label={"Email Sign in"} type={"email"} name={"Emailsignin"} value={Emailsignin}/>
-                                        <Signin label={"password Sign in"} type={"password"} name={"Passwordsignin"} value={Passwordsignin} />
+                                        <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} id={"Signin"} onSubmit={SubmitSignin}>
+                                            <Signin label={"Email Sign in"} type={"email"} name={"Emailsignin"} value={Emailsignin} />
+                                            <Signin label={"password Sign in"} type={"password"} name={"Passwordsignin"} value={Passwordsignin} />
                                         </Box>
                                         <Button variant="contained" form="Signin" type="submit">Sign in</Button>
                                         <Box display={"flex"} gap={1} sx={{ flexDirection: { sm: "row", xs: "column" } }} justifyContent={"space-between"}>
@@ -96,10 +156,10 @@ export default function Header() {
                                         <Typography variant="h5" display={"flex"} justifyContent={"center"} fontWeight={"400"} textTransform={"capitalize"}>
                                             sign up
                                         </Typography>
-                                        <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} id={"Signup"}>
-                                        <Signup label={"Name Sign up"} value={NameSignup} name={"NameSignup"}/>
-                                        <Signup label={"Email Sign up"} value={EmailSignup} name={"EmailSignup"} type={"email"} />
-                                        <Signup label={"password Sign up"} value={PasswordSignup} name={"PasswordSignup"} type={"password"} />
+                                        <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} onSubmit={SubmitSignup} id={"Signup"}>
+                                            <Signup label={"Name Sign up"} value={NameSignup} name={"NameSignup"} />
+                                            <Signup label={"Email Sign up"} value={EmailSignup} name={"EmailSignup"} type={"email"} focus={focusState? true :false} />
+                                            <Signup label={"password Sign up"} value={PasswordSignup} name={"PasswordSignup"} type={"password"} />
                                         </Box>
                                         <Button variant="contained" type="submit" form={"Signup"} >Sign up</Button>
                                         <Button variant="contained" startIcon={<GoogleIcon />}>Sign up with Google</Button>

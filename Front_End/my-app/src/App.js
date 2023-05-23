@@ -10,10 +10,12 @@ import Help from "./Web_App_Pages/Help_Desk.jsx";
 import MyProfile from "./Web_App_Pages/MyProfile";
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 
 function App() {
   const [single_post_info,updateinfo]=useState([])
+  const Routesvalue=useSelector((state)=>state.Routes.RoutesValue)
   return<>
   <BrowserRouter>
   <Routes>
@@ -21,11 +23,18 @@ function App() {
     <Route path="/Blogs" element={<Blogs single_post={updateinfo}/>}/>
     <Route path="/Contact_us" element={<Contactus/>}/>
     <Route path="/Post_Detail" element={<PostDetail single_post_info={single_post_info}/>}/>
-    <Route path="/Dashboard" element={<Dashboard/>}/>
-    <Route path="/MyBlogs" element={<MyBlogs/>}/>
-    <Route path="/MyProfile" element={<MyProfile/>}/>
-    <Route path="/Comments" element={<Comments/>}/>
-    <Route path="/Help_Desk" element={<Help/>}/>
+    {
+      Routesvalue ?   
+      <>
+      <Route path="/Dashboard" element={<Dashboard/>}/>
+      <Route path="/MyBlogs" element={<MyBlogs/>}/>
+      <Route path="/MyProfile" element={<MyProfile/>}/>
+      <Route path="/Comments" element={<Comments/>}/>
+      <Route path="/Help_Desk" element={<Help/>}/>
+      </>
+      :null
+    }
+ 
      </Routes>
   </BrowserRouter>
   
