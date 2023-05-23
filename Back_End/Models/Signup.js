@@ -24,7 +24,6 @@ const CreateDoc = async (data) => {
             }
         )
         const result = await Create_Document.save()
-        // console.log(result)
         return { message: "Successfully inserted record" }
     } catch (error) {
         return { message: "This Email has already been use try another email" }
