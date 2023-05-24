@@ -10,8 +10,12 @@ export const LoginReducer=createSlice({
         ChangeLogin:(state,action)=>
         {
         return ({...state,...action.payload})
+        },
+        LogIn:()=>
+        {
+            return({Emailsignin:"",Passwordsignin:""})
         }
     }
 })
-export const {ChangeLogin}=LoginReducer.actions
+export const {ChangeLogin,LogIn}=LoginReducer.actions
 export default LoginReducer.reducer

@@ -6,10 +6,14 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Signup from "../Auth/Signup";
 import Signin from "../Auth/Signin";
-import { useSelector,useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Resetdata } from "../Redux/AuthReducers/SignupFormReducer";
+import { LoggedIn } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
+import {LogIn} from '../Redux/AuthReducers/LoginReducers'
+import { useNavigate } from "react-router-dom";
 export default function Header() {
-    const Dispatch=useDispatch()
+    const Dispatch = useDispatch()
+    const navigate=useNavigate()
     const Signupformstate = useSelector((state) => state.Signup)
     const LoginFormState = useSelector((state) => state.Login)
     const { NameSignup, EmailSignup, PasswordSignup } = Signupformstate
@@ -17,58 +21,79 @@ export default function Header() {
     const [list, update_list] = useState(false)
     const [open, setopen] = useState(false)
     const [sign, update_sign] = useState(true)
-    const [focusState,setfocus]=useState(false)
-    const [Record_Insert,Update_Insert]=useState(false)
+    const [focusState, setfocus] = useState(false)
+    const [Record_Insert, Update_Insert] = useState(false)
 
     const SubmitSignup = async (e) => {
         e.preventDefault()
         try {
             const response = await fetch("http://localhost:8000/User/Signup",
-            {
-                method: "POST",
-                body: JSON.stringify(Signupformstate),
-                headers: {
-                    "Content-Type": "application/json",
+                {
+                    method: "POST",
+                    body: JSON.stringify(Signupformstate),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
                 }
+            )
+            const actual_res = await response.json()
+            if (actual_res.message === "Successfully inserted record") {
+                Dispatch(Resetdata())
+                setfocus(false)
+                update_sign(true)
+                Update_Insert(true)
+                setTimeout(() => {
+                    Update_Insert(false)
+                }, 1500);
             }
-        )
-        const actual_res=await response.json()
-        if(actual_res.message==="Successfully inserted record")
-        {
-          Dispatch(Resetdata())  
-          setfocus(false)
-          update_sign(true)
-          Update_Insert(true)
-          setTimeout(() => {
-            Update_Insert(false)
-          }, 1500);
-        }
-        else
-        {
-            alert(actual_res.message)
-            setfocus(true)
+            else {
+                alert(actual_res.message)
+                setfocus(true)
 
 
-        }
-            
+            }
+
         } catch (error) {
             console.log(error)
         }
-       
-    }
-    const SubmitSignin=async (e)=>
-    {
-        e.preventDefault()
-        fetch("http://localhost:8000/User/Signin",
-        {
-            method:"post",
-            body:JSON.stringify(LoginFormState),
-            headers:{
-                "Content-Type": "application/json",
 
+    }
+    const SubmitSignin = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await fetch("http://localhost:8000/User/Signin",
+                {
+                    method: "post",
+                    body: JSON.stringify(LoginFormState),
+                    headers: {
+                        "Content-Type": "application/json",
+
+                    }
+                }
+            )
+            const data = await res.json()
+            const type = typeof (data)
+            if (type === "object") {
+                if (data.message === 'Password Does Not Match') {
+                    console.log(data.message)
+                }
+                else if (data.message === 'Email Not Found Create First Account') {
+
+                    console.log(data.message)
+                }
+                else {
+                    console.log(data);
+                    Dispatch( LoggedIn() );
+                    Dispatch( LogIn() )
+                    navigate('/Dashboard')
+                }
             }
+
+        } catch (error) {
+            console.log(error)
+
         }
-        )
+
 
     }
     const Open_Nav = () => {
@@ -104,11 +129,11 @@ export default function Header() {
     return <>
         <Stack position={"fixed"} width={"100%"} zIndex={1} borderColor={"#ffffff45"}>
             <Stack p={1} flexDirection={"row"} sx={{ justifyContent: { md: "flex-start", xs: "space-between" }, backgroundColor: '#2324254f' }}>
-{
-    Record_Insert ?  <Box position={"absolute"} zIndex={"12000"} border={1} color={"black"} fontFamily={"Raleway"} p={2} left={"50%"} sx={{   transform: 'translate(-50%)',backgroundColor:"white"}} >Successfully inserted record</Box>
-    :null
-}
-               
+                {
+                    Record_Insert ? <Box position={"absolute"} zIndex={"12000"} border={1} color={"black"} fontFamily={"Raleway"} p={2} left={"50%"} sx={{ transform: 'translate(-50%)', backgroundColor: "white" }} >Successfully inserted record</Box>
+                        : null
+                }
+
                 <Box color="white" flex={3} display={"flex"} alignItems={"center"} gap={1} fontFamily={"Raleway"} textTransform={"uppercase"}><i class="fa-solid fa-blog"></i> Blog </Box>
                 <Box display={"flex"} justifyContent={"center"} flex={4} sx={{
                     display: { md: 'flex', xs: 'none' }
@@ -158,7 +183,7 @@ export default function Header() {
                                         </Typography>
                                         <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} onSubmit={SubmitSignup} id={"Signup"}>
                                             <Signup label={"Name Sign up"} value={NameSignup} name={"NameSignup"} />
-                                            <Signup label={"Email Sign up"} value={EmailSignup} name={"EmailSignup"} type={"email"} focus={focusState? true :false} />
+                                            <Signup label={"Email Sign up"} value={EmailSignup} name={"EmailSignup"} type={"email"} focus={focusState ? true : false} />
                                             <Signup label={"password Sign up"} value={PasswordSignup} name={"PasswordSignup"} type={"password"} />
                                         </Box>
                                         <Button variant="contained" type="submit" form={"Signup"} >Sign up</Button>
