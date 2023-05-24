@@ -24,7 +24,7 @@ function App() {
         <Route path="/Blogs" element={<Blogs single_post={updateinfo} />} />
         <Route path="/Contact_us" element={<Contactus />} />
         <Route path="/Post_Detail" element={<PostDetail single_post_info={single_post_info} />} />
-       { !Routesvalue &&<Route path="*" element={<Home />} />}
+        {!Routesvalue && <Route path="*" element={<Home />} />}
 
         {
           Routesvalue &&

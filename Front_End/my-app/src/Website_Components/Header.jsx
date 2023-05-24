@@ -9,11 +9,11 @@ import Signin from "../Auth/Signin";
 import { useSelector, useDispatch } from "react-redux";
 import { Resetdata } from "../Redux/AuthReducers/SignupFormReducer";
 import { LoggedIn } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
-import {LogIn} from '../Redux/AuthReducers/LoginReducers'
+import { LogIn } from '../Redux/AuthReducers/LoginReducers'
 import { useNavigate } from "react-router-dom";
 export default function Header() {
     const Dispatch = useDispatch()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const Signupformstate = useSelector((state) => state.Signup)
     const LoginFormState = useSelector((state) => state.Login)
     const { NameSignup, EmailSignup, PasswordSignup } = Signupformstate
@@ -72,22 +72,20 @@ export default function Header() {
                 }
             )
             const data = await res.json()
-            const type = typeof (data)
-            if (type === "object") {
-                if (data.message === 'Password Does Not Match') {
-                    console.log(data.message)
-                }
-                else if (data.message === 'Email Not Found Create First Account') {
-
-                    console.log(data.message)
-                }
-                else {
-                    console.log(data);
-                    Dispatch( LoggedIn() );
-                    Dispatch( LogIn() )
-                    navigate('/Dashboard')
-                }
+            if (data.message === 'Password Does Not Match') {
+                console.log(data.message)
             }
+            else if (data.message === 'Email Not Found Create First Account') {
+
+                console.log(data.message)
+            }
+            else {
+                console.log(data);
+                Dispatch(LoggedIn());
+                Dispatch(LogIn())
+                navigate('/Dashboard')
+            }
+
 
         } catch (error) {
             console.log(error)
