@@ -1,4 +1,4 @@
-import { Stack, Box, Button, IconButton, Modal, Typography } from "@mui/material";
+import { Stack, Box, Button, IconButton, Modal, Typography, Menu, MenuItem } from "@mui/material";
 import ReorderIcon from '@mui/icons-material/Reorder';
 import GoogleIcon from '@mui/icons-material/Google';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
@@ -10,12 +10,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Resetdata } from "../Redux/AuthReducers/SignupFormReducer";
 import { LoggedIn } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
 import { LogIn } from '../Redux/AuthReducers/LoginReducers'
+import { GotoDashBoard } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
 import { useNavigate } from "react-router-dom";
+import { LoggedOut } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
 export default function Header() {
     const Dispatch = useDispatch()
     const navigate = useNavigate()
     const Signupformstate = useSelector((state) => state.Signup)
     const LoginFormState = useSelector((state) => state.Login)
+    const NotSignindata = useSelector((state) => state.Routes.NotSignin)
+    const LoginProperdata = useSelector((state) => state.Routes.LoginProper)
     const { NameSignup, EmailSignup, PasswordSignup } = Signupformstate
     const { Emailsignin, Passwordsignin } = LoginFormState
     const [list, update_list] = useState(false)
@@ -23,6 +27,7 @@ export default function Header() {
     const [sign, update_sign] = useState(true)
     const [focusState, setfocus] = useState(false)
     const [Record_Insert, Update_Insert] = useState(false)
+    const [OpenMenu, updateMenu] = useState(false)
 
     const SubmitSignup = async (e) => {
         e.preventDefault()
@@ -80,10 +85,11 @@ export default function Header() {
                 console.log(data.message)
             }
             else {
-                console.log(data);
+                localStorage.setItem("SecretKey", JSON.stringify(data))
                 Dispatch(LoggedIn());
-                Dispatch(LogIn())
-                navigate('/Dashboard')
+                Dispatch(LogIn());
+                setopen(false);
+
             }
 
 
@@ -124,6 +130,19 @@ export default function Header() {
         flexDirection: "column",
         gap: 3
     };
+    const AfterSignin = () => {
+        if (!OpenMenu) {
+            updateMenu(true)
+        }
+        else {
+            updateMenu(false)
+        }
+    }
+    const OpenDashBoard=()=>
+    {
+        Dispatch(GotoDashBoard());
+        navigate('/MyBlogs')
+    }
     return <>
         <Stack position={"fixed"} width={"100%"} zIndex={1} borderColor={"#ffffff45"}>
             <Stack p={1} flexDirection={"row"} sx={{ justifyContent: { md: "flex-start", xs: "space-between" }, backgroundColor: '#2324254f' }}>
@@ -141,7 +160,52 @@ export default function Header() {
                 <Box flex={1} display={"flex"} justifyContent={"center"} sx={{
                     display: { md: 'flex', xs: 'none' }
                 }}>
-                    <Button color="White" sx={{ paddingX: '15px' }} onClick={() => openAuthModal()}>Sign in</Button>
+                    {
+                        NotSignindata &&
+                        <Button color="White" sx={{ paddingX: '15px' }} onClick={() => openAuthModal()}>Sign in</Button>
+                    }
+                    {
+                        LoginProperdata &&
+                        <>
+                            <Button
+                                variant="text"
+                                sx={{ color: "white" }}
+
+                                onClick={AfterSignin}
+
+                            >
+                                My Account
+                            </Button>
+                            <Menu
+                                id="demo-positioned-menu"
+                                aria-labelledby="demo-positioned-button"
+                                open={OpenMenu}
+                                // onClose={handleClose}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                sx={{ "a": { color: "black", textDecoration: "none" } }}
+                            >
+
+                                <MenuItem  onClick={OpenDashBoard}>My Post</MenuItem>
+                                <MenuItem  onClick={
+                                    ()=>
+                                    {
+                                        Dispatch(LoggedOut())
+                                        navigate('/')
+                                        localStorage.removeItem('SecretKey');
+                                    }
+                                     
+                                }>Logout</MenuItem>
+                            </Menu>
+                        </>
+
+                    }
 
                     <Modal
                         open={open}

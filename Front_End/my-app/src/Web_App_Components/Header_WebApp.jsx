@@ -4,7 +4,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
 import UserPic from '../Web_App_Components/Images/hammad.jpeg'
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { LoggedOut } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
+import { useNavigate } from "react-router-dom";
 export default function HeaderWebApp() {
+    const Dispatch = useDispatch()
+    const navigate = useNavigate()
     const [Open, SetOpen] = useState(false)
     const OpenProfile = () => {
         if (!Open) {
@@ -46,7 +51,18 @@ export default function HeaderWebApp() {
                         >
                             <MenuItem sx={{"a":{color:"black",textDecoration:"none"}}}><Link to={"/MyProfile"} >Profile</Link></MenuItem>
                             <MenuItem >My account</MenuItem>
-                            <MenuItem >Logout</MenuItem>
+                            <MenuItem onClick=
+                            {
+                                ()=>
+                                {
+                                    Dispatch(LoggedOut())
+                                    navigate('/')
+                                    localStorage.removeItem('SecretKey');
+                    
+                                }
+                               
+                                }
+                                >Logout</MenuItem>
                         </Menu> : null
                         }
 
