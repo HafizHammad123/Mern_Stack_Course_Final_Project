@@ -52,11 +52,11 @@ export default function MyProfile() {
                 >
                     <Box sx={style} >
                         <Typography variant="h5" component={"h1"} display={"flex"} justifyContent={"center"} > Edit Profile Form</Typography>
-
-                        <TextField label="Email" type={"email"}></TextField>
-                        <TextField label="Name" ></TextField>
-
-                        <Button startIcon={<EditIcon />} variant="contained">Edit Profile</Button>
+                        <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} id={"EditProfile"} >
+                            <TextField label="Email" type={"email"} required></TextField>
+                            <TextField label="Name" required ></TextField>
+                        </Box>
+                        <Button startIcon={<EditIcon />} variant="contained" type="submit" form="EditProfile">Edit Profile</Button>
 
 
                     </Box>

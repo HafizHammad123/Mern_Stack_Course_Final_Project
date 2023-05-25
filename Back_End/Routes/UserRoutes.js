@@ -18,5 +18,11 @@ router.get("/Personal/Blog", (req, res) => {
 router.get("/All/Blogs", (req, res) => {
   res.send({ name: "hammad" })
 })
+router.post('/EditProfile', (req, res) => {
+  res.send("Edit Profile")
+})
+router.post('/ForgetPassword', (req, res) => {
+  res.send("Forget Password")
+})
 
 module.exports = router
