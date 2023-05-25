@@ -16,28 +16,34 @@ import { useSelector } from "react-redux";
 function App() {
   const [single_post_info, updateinfo] = useState([])
   const DashboardRoutes = useSelector((state) => state.Routes.DashboardRoutes)
-  const WebsiteRoutes = useSelector((state) => state.Routes.WebsiteRoutes)
   console.log(DashboardRoutes)
-  console.log(WebsiteRoutes)
+  // const WebsiteRoutes = useSelector((state) => state.Routes.WebsiteRoutes)
+  console.log(DashboardRoutes)
+  // console.log(WebsiteRoutes)
+  // console.log(localStorage.getItem('SecretKey'))
+  // const Token=localStorage.getItem('SecretKey')
+
   return <>
     <BrowserRouter>
       <Routes>
 
         {
-          WebsiteRoutes &&
+          !DashboardRoutes &&
           <>
             <Route index element={<Home />} />
             <Route path="/Blogs" element={<Blogs single_post={updateinfo} />} />
             <Route path="/Contact_us" element={<Contactus />} />
             <Route path="/Post_Detail" element={<PostDetail single_post_info={single_post_info} />} />
           </>
-      
         }
-
         {
-          DashboardRoutes ? <Route path="*" element={<Dashboard />} /> : <Route path="*" element={<Home />} />
+          !DashboardRoutes &&
+          <Route path="*" element={<Home />} />
         }
-
+        {
+          DashboardRoutes &&
+          <Route path="*" element={<Dashboard />} />
+        }
         {
           DashboardRoutes &&
           <>
@@ -47,7 +53,7 @@ function App() {
             <Route path="/Comments" element={<Comments />} />
             <Route path="/Help_Desk" element={<Help />} />
           </>
-          
+
         }
 
       </Routes>

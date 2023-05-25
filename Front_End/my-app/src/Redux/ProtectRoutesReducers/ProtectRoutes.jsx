@@ -3,15 +3,15 @@ export const Protect_Routes = createSlice({
     name: "Protect_Routes",
     initialState: {
         WebsiteRoutes: true,
-        DashboardRoutes: false,
+        DashboardRoutes:localStorage.getItem('SecretKey'),
         NotSignin: true,
         LoginProper: false
 
     },
     reducers:
     {
-        LoggedIn: (state) => {
-            state.DashboardRoutes = true;
+        LoggedIn: (state,action) => {
+            state.DashboardRoutes = action.payload;
             state.NotSignin = false;
             state.LoginProper = true
 

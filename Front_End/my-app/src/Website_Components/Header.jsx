@@ -86,9 +86,10 @@ export default function Header() {
             }
             else {
                 localStorage.setItem("SecretKey", JSON.stringify(data))
-                Dispatch(LoggedIn());
+                Dispatch(LoggedIn(localStorage.getItem('SecretKey')));
                 Dispatch(LogIn());
                 setopen(false);
+                navigate('/Dashboard')
 
             }
 
