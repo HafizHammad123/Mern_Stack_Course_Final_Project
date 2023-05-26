@@ -3,11 +3,11 @@ const cors=require('cors')
 const User=require('./Routes/UserRoutes')
 const {connectdb}=require('./db/Connection')
 const app=express()
-require('./Models/User_PostModel')
+
 
 app.use(cors())
 app.use(express.json())
- connectdb()
+connectdb()
 
 // CALL USER MODULE HERE
 
