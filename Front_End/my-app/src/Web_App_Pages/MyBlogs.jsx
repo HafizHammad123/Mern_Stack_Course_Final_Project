@@ -9,6 +9,7 @@ import Form from "../Form/Form";
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from "react-redux";
 import { Submit } from '../Redux/BlogsReducers/BlogFormreducer1'
+import { CreatePostStore } from '../Redux/BlogsReducers/StoreBlogReducer'
 
 
 export default function MyBlogs() {
@@ -16,6 +17,11 @@ export default function MyBlogs() {
     const BlogFieldData = useSelector((state) => state.BlogForm)
     const { AuthorName, Title, Description, Img } = BlogFieldData
     const [open, setopen] = useState(false)
+    const token = JSON.parse(localStorage.getItem('SecretKey'));
+    const SecretToken = `Bearer ${token.SecretToken}`
+
+
+
     const OpenModal = () => {
         setopen(true)
     }
@@ -42,16 +48,18 @@ export default function MyBlogs() {
             const Response = await fetch('http://localhost:8000/User/Create/Post',
                 {
                     method: 'POST',
-                    body: JSON.stringify(BlogFieldData),
+                    body: JSON.stringify({BlogData:BlogFieldData,ID:token.ID}),
                     headers:
                     {
                         "Content-Type": "application/json",
+                        'Authorization': SecretToken
                     }
 
                 })
             const data = await Response.json()
             console.log(data)
             Dispatch(Submit())
+            Dispatch(CreatePostStore(data))
             setopen(false)
 
         } catch (error) {

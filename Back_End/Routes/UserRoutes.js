@@ -2,19 +2,21 @@ const express = require('express')
 const router = express.Router()
 const { SignupController } = require('../Controller/UserController/SignupController')
 const { SigninController } = require('../Controller/UserController/SigninController')
-const { CreatePostController }=require("../Controller/UserController/CreatePostController")
+const { CreatePostMiddleWare } = require('../Controller/UserController/CreatePostController')
+const { CreatePostController } = require("../Controller/UserController/CreatePostController")
+const { PersonalBlogMiddleWare } = require('../Controller/UserController/FetchPersonalBlogController')
+const { FetchPersonalBlogController } = require('../Controller/UserController/FetchPersonalBlogController')
 
 
 router.post('/Signup', SignupController)
 router.post('/Signin', SigninController)
-router.post('/Create/Post',CreatePostController)
-router.delete('/Delete/Post', (req, res) => {
+router.post('/Create/Post', CreatePostMiddleWare, CreatePostController)
+router.delete('/Delete/Post', (req,res)=>
+{
 })
 router.put("/Update/Post", (req, res) => {
 })
-router.get("/Personal/Blog", (req, res) => {
-  res.send("hello")
-})
+router.get("/Personal/Blog/:id",PersonalBlogMiddleWare, FetchPersonalBlogController)
 router.get("/All/Blogs", (req, res) => {
   res.send({ name: "hammad" })
 })
