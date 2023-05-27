@@ -1,9 +1,12 @@
+import React from "react";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
 export default function ShowUserOwnBlogs() {
+  const Dispatch=useDispatch()
   const StorePost = useSelector((state) => state.StorePost)
   const token = JSON.parse(localStorage.getItem('SecretKey'));
   const SecretToken = `Bearer ${token.SecretToken}`
@@ -14,7 +17,6 @@ export default function ShowUserOwnBlogs() {
         const Response = await fetch(`http://localhost:8000/User/Personal/Blog/${token.ID}`,
           {
             method: "GET",
-            // body: JSON.stringify({ ID: token.ID }),
             headers:
             {
               "Content-Type": "application/json",
@@ -23,14 +25,15 @@ export default function ShowUserOwnBlogs() {
 
           })
         const FetchAllData= await Response.json()
-        console.log(FetchAllData)
+        Dispatch(FetchAllBlogs(FetchAllData))
+        
       } catch (error) {
         console.log(error)
       }
     }
     GetAllPersonalBlog();
 
-  }, []);
+  },[ ]);
   const style = {
     flex: { lg: "400px", md: "250px", sm: "300px" },
   }

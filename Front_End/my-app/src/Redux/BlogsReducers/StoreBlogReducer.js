@@ -6,9 +6,12 @@ export const StoreBlogPost = createSlice({
     {
         CreatePostStore: (state, action) => {
             return [...state, action.payload]
+        },
+        FetchAllBlogs: (state, action) => {
+            return [...action.payload]
         }
     }
 })
 
-export const { CreatePostStore } = StoreBlogPost.actions;
+export const { CreatePostStore, FetchAllBlogs } = StoreBlogPost.actions;
 export default StoreBlogPost.reducer

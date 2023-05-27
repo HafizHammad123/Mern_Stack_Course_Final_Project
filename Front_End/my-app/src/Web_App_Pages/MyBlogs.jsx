@@ -20,8 +20,6 @@ export default function MyBlogs() {
     const token = JSON.parse(localStorage.getItem('SecretKey'));
     const SecretToken = `Bearer ${token.SecretToken}`
 
-
-
     const OpenModal = () => {
         setopen(true)
     }
@@ -74,11 +72,7 @@ export default function MyBlogs() {
         <Stack flexDirection={"row"} sx={{ justifyContent: { md: "flex-end" } }}  >
             <SideNavWebApp />
             <Stack sx={{ width: { lg: "80%", md: "75%", xs: "100%" } }}  >
-
-
                 <Stack display={"flex"} flexDirection={"column"} gap={2} paddingY={"10px"} paddingX={"10px"}>
-
-
                     <TextField label="Search" type={"search"} />
                     <Stack flexDirection={"row"} gap={1}>
                         <Avatar></Avatar>
