@@ -4,7 +4,7 @@ import Footer from "../Website_Components/Footer";
 import { Container, Stack, Box } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-export default function Blogs({single_post}) {
+export default function Blogs() {
     const [Post, Update_Post] = useState([])
     const Navigate = useNavigate()
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function Blogs({single_post}) {
 
     }, [])
     const PostDetail = (post_detail) => {
-        localStorage.setItem("PostDetail",JSON.stringify(post_detail))
+        localStorage.setItem("PostDetail", JSON.stringify(post_detail))
         Navigate('/Post_Detail')
     }
 
@@ -45,7 +45,7 @@ export default function Blogs({single_post}) {
                     Post.map(Post_Items =>
                     (
                         <Fragment>
-                            <Stack  p={2} rowGap={2} fontFamily={"Raleway"} sx={{ backgroundColor: "#ffff", flex:{md:"360px"} }} >
+                            <Stack p={2} rowGap={2} fontFamily={"Raleway"} sx={{ backgroundColor: "#ffff", flex: { md: "360px" } }} >
                                 <Box>{Post_Items.Description}</Box>
                                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
                                     <Box display={"flex"} flexDirection={"column"} rowGap={1}>
@@ -69,7 +69,6 @@ export default function Blogs({single_post}) {
                 }
             </Container>
         </Stack>
-
         <Footer></Footer>
 
 

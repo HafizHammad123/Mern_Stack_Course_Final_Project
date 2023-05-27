@@ -8,9 +8,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Link } from "react-router-dom";
 
 export default function PostDetail() {
-
-    const [PostDetail]=useState([JSON.parse(localStorage.getItem('PostDetail'))])
-console.log(PostDetail)
+    const [PostDetail] = useState([JSON.parse(localStorage.getItem('PostDetail'))])
     return <>
         <Banner />
         <Stack flexDirection={"row"} flexWrap={"wrap"} >
