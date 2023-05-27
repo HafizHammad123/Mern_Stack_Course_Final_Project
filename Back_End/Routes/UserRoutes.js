@@ -11,13 +11,12 @@ const { Getallblogs } = require('../Controller/UserController/GetAllBlogs')
 router.post('/Signup', SignupController)
 router.post('/Signin', SigninController)
 router.post('/Create/Post', CreatePostMiddleWare, CreatePostController)
-router.delete('/Delete/Post', (req,res)=>
-{
+router.delete('/Delete/Post', (req, res) => {
 })
 router.put("/Update/Post", (req, res) => {
 })
-router.get("/Personal/Blog/:id",PersonalBlogMiddleWare, FetchPersonalBlogController)
-router.get("/All/Blogs",Getallblogs)
+router.get("/Personal/Blog/:id", PersonalBlogMiddleWare, FetchPersonalBlogController)
+router.get("/All/Blogs", Getallblogs)
 router.post('/EditProfile', (req, res) => {
   res.send("Edit Profile")
 })

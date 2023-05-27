@@ -2,7 +2,6 @@ const { CreatePostModelFunction } = require('../../Models/User_PostModel')
 const Jwt = require('jsonwebtoken')
 const Secret_Key = "Signin"
 
-
 const CreatePostMiddleWare = (req, res, next) => {
     if (req.headers.authorization) {
         const Token = req.headers.authorization.split(' ')
@@ -11,8 +10,6 @@ const CreatePostMiddleWare = (req, res, next) => {
                 res.send({ message: "Un Authorized User token" })
             }
             else {
-
-                console.log("Token Verified")
                 next()
             }
         })
@@ -24,7 +21,6 @@ const CreatePostMiddleWare = (req, res, next) => {
 }
 
 const CreatePostController = (req, res) => {
-    console.log(req.body)
     CreatePostModelFunction(req.body).then((data) => res.send(data))
 
 }
