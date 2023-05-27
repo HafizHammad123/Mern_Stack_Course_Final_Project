@@ -6,7 +6,7 @@ const Getallblogs=async(req,res)=>
         res.send(FindAllBlog)
 
     } catch (error) {
-         console.log(error)
+        res.send(error)
     }
 }
 module.exports={ Getallblogs }

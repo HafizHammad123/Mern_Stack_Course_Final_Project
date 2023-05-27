@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import HeaderWebApp from "../Web_App_Components/Header_WebApp";
 import SideNavWebApp from "../Web_App_Components/Side_Navbar";
 import FooterWebApp from "../Web_App_Components/Footer_WebApp";
@@ -10,21 +9,20 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from "react-redux";
 import { Submit } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { CreatePostStore } from '../Redux/BlogsReducers/StoreBlogReducer'
+import { OpenModal ,BlogPublished } from '../Redux/BlogsReducers/BlogRelatedReducer'
 
 
 export default function MyBlogs() {
     const Dispatch = useDispatch()
     const BlogFieldData = useSelector((state) => state.BlogForm)
-    const { AuthorName, Title, Description, Img } = BlogFieldData
-    const [open, setopen] = useState(false)
+    const BlogRelatedStates=useSelector((state)=>state.BlogRelatedStates)
+    const { ModalStates,BlogPublishButton }=BlogRelatedStates
+    const { Author_Name, Title, Description, Image } = BlogFieldData
     const token = JSON.parse(localStorage.getItem('SecretKey'));
     const SecretToken = `Bearer ${token.SecretToken}`
 
-    const OpenModal = () => {
-        setopen(true)
-    }
     const handleClose = () => {
-        setopen(false)
+        Dispatch(BlogPublished())
     }
     const style = {
         position: 'absolute',
@@ -55,10 +53,9 @@ export default function MyBlogs() {
 
                 })
             const data = await Response.json()
-            console.log(data)
+            Dispatch(BlogPublished())
             Dispatch(Submit())
             Dispatch(CreatePostStore(data))
-            setopen(false)
 
         } catch (error) {
             console.log(error)
@@ -76,9 +73,9 @@ export default function MyBlogs() {
                     <TextField label="Search" type={"search"} />
                     <Stack flexDirection={"row"} gap={1}>
                         <Avatar></Avatar>
-                        <Box onClick={() => OpenModal()} sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>
+                        <Box onClick={() =>Dispatch(OpenModal())} sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>
                         <Modal
-                            open={open}
+                            open={ModalStates}
                             onClose={handleClose}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
@@ -88,12 +85,15 @@ export default function MyBlogs() {
                                     Create Post
                                 </Typography>
                                 <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2} onSubmit={PublishPost}>
-                                    <Form label={"Author Name"} value={AuthorName} name={'AuthorName'} />
+                                    <Form label={"Author Name"} value={Author_Name} name={'Author_Name'} />
                                     <Form label={"Title"} value={Title} name={'Title'} />
                                     <Form label={"Description"} value={Description} name={'Description'} />
-                                    <Form type={"file"} value={Img} name={'Img'} />
+                                    <Form type={"file"} value={Image} name={'Image'} />
                                 </Box>
-                                <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Publish Post</Button>
+                                {
+                                    BlogPublishButton ?  <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Publish Post</Button> :      <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Update Post</Button>
+                                }
+                           
 
 
 

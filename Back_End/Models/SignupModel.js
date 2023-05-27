@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt=require('bcrypt')
+const bcrypt = require('bcrypt')
 
 // defining mongoose.Schema
 
@@ -16,8 +16,8 @@ const Signup_Schema = new mongoose.Schema(
 const Signup_Collection = mongoose.model('User_Signup', Signup_Schema)
 
 const CreateDoc = async (data) => {
-    const HashPassword= await bcrypt.hash(data.PasswordSignup,12)
-  
+    const HashPassword = await bcrypt.hash(data.PasswordSignup, 12)
+
     try {
         const Create_Document = new Signup_Collection(
             {
@@ -26,7 +26,7 @@ const CreateDoc = async (data) => {
                 Password: HashPassword
             }
         )
-        const result = await Create_Document.save()
+        await Create_Document.save()
         return { message: "Successfully inserted record" }
     } catch (error) {
         return { message: "This Email has already been use try another email" }

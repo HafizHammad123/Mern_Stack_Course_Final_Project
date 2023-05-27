@@ -4,6 +4,7 @@ import Signupreducer from './AuthReducers/SignupFormReducer'
 import Loginreducer from './AuthReducers/LoginReducers'
 import ProtectRoutes from './ProtectRoutesReducers/ProtectRoutes'
 import StoreBlogPostData from './BlogsReducers/StoreBlogReducer'
+import BlogRelatedReducer from './BlogsReducers/BlogRelatedReducer'
 
 export const  Store=configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const  Store=configureStore({
     Signup:Signupreducer,
     Login:Loginreducer,
     Routes:ProtectRoutes,
-    StorePost:StoreBlogPostData
+    StorePost:StoreBlogPostData,
+    BlogRelatedStates:BlogRelatedReducer
   },
 })

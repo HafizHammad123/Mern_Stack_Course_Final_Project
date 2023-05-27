@@ -2,17 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const BlogFormReducer = createSlice({
   name: 'BlogFormReducer',
   initialState: {
-    AuthorName: "",
+    Author_Name: "",
     Title: "",
     Description: "",
-    Img: ""
+    Image: ""
   },
   reducers: {
     Change: (state, action) => ({
       ...state, ...action.payload
     }),
     Submit: () => {
-      return { AuthorName: "", Title: "", Description: "", Img: "" }
+      return { Author_Name: "", Title: "", Description: "", Image: "" }
     }
 
 

@@ -5,11 +5,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector ,useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
+import { OpenModal , ChangeButton } from '../Redux/BlogsReducers/BlogRelatedReducer'
 export default function ShowUserOwnBlogs() {
   const Dispatch=useDispatch()
   const StorePost = useSelector((state) => state.StorePost)
   const token = JSON.parse(localStorage.getItem('SecretKey'));
   const SecretToken = `Bearer ${token.SecretToken}`
+
   useEffect(() => {
 
     const GetAllPersonalBlog = async () => {
@@ -63,7 +65,11 @@ export default function ShowUserOwnBlogs() {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
+              <IconButton aria-label="add to favorites" onClick={()=>
+              {
+                Dispatch(OpenModal())
+                Dispatch(ChangeButton())
+              }}>
                 <EditIcon />
               </IconButton>
               <IconButton aria-label="share">

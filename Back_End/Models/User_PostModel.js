@@ -12,14 +12,14 @@ const Blog_Post_Schema = new mongoose.Schema({
 const Blog_Post = mongoose.model('Blog_Post', Blog_Post_Schema)
 const CreatePostModelFunction = async (CreatePostData) => {
 
-    const { AuthorName, Title, Description, Img } = CreatePostData.BlogData;
+    const { Author_Name, Title, Description, Image } = CreatePostData.BlogData;
     const { ID } = CreatePostData
 
     const InserPost = new Blog_Post({
-        Author_Name: AuthorName,
+        Author_Name: Author_Name,
         Title: Title,
         Description: Description,
-        Image: Img,
+        Image: Image,
         UserID: ID,
         Publish_Date: Date()
 

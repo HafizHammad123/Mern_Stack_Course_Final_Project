@@ -18,7 +18,6 @@ export default function Blogs() {
                     throw new Error("error")
                 }
                 const actual_res = await response.json()
-                console.log(actual_res)
                 Update_Post([...actual_res])
 
             } catch (error) {
