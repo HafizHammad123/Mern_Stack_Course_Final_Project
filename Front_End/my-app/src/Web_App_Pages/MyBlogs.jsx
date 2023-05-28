@@ -10,14 +10,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Submit } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { CreatePostStore } from '../Redux/BlogsReducers/StoreBlogReducer'
 import { OpenModal ,BlogPublished } from '../Redux/BlogsReducers/BlogRelatedReducer'
-
+import { Change } from '../Redux/BlogsReducers/BlogFormreducer1'
 
 export default function MyBlogs() {
     const Dispatch = useDispatch()
     const BlogFieldData = useSelector((state) => state.BlogForm)
-    const BlogRelatedStates=useSelector((state)=>state.BlogRelatedStates)
+    const BlogRelatedStates=useSelector((state) => state.BlogRelatedStates)
+    console.log(BlogFieldData)
     const { ModalStates,BlogPublishButton }=BlogRelatedStates
     const { Author_Name, Title, Description, Image } = BlogFieldData
+    console.log(Image)
     const token = JSON.parse(localStorage.getItem('SecretKey'));
     const SecretToken = `Bearer ${token.SecretToken}`
 
@@ -41,6 +43,7 @@ export default function MyBlogs() {
     const PublishPost = async (e) => {
         e.preventDefault()
         try {
+         debugger
             const Response = await fetch('http://localhost:8000/User/Create/Post',
                 {
                     method: 'POST',
@@ -61,6 +64,15 @@ export default function MyBlogs() {
             console.log(error)
         }
 
+    }
+    const Base64=(file)=>
+    {
+        return new Promise((resolve, reject) => {
+            const reader=new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload=()=>{resolve(reader.result)};
+            reader.onerror=(error)=>reject(error)
+        })
     }
 
     return <>
@@ -85,10 +97,20 @@ export default function MyBlogs() {
                                     Create Post
                                 </Typography>
                                 <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2} onSubmit={PublishPost}>
-                                    <Form label={"Author Name"} value={Author_Name} name={'Author_Name'} />
-                                    <Form label={"Title"} value={Title} name={'Title'} />
-                                    <Form label={"Description"} value={Description} name={'Description'} />
-                                    <Form type={"file"} value={Image} name={'Image'} />
+                                    <Form label={"Author Name"} value={Author_Name} name={'Author_Name'}  onChange={(e)=>Dispatch(Change({[e.target.name]:e.target.value}))}/>
+                                    <Form label={"Title"} value={Title} name={'Title'}  onChange={(e)=>Dispatch(Change({[e.target.name]:e.target.value}))} />
+                                    <Form label={"Description"} value={Description} name={'Description'}  onChange={(e)=>Dispatch(Change({[e.target.name]:e.target.value}))} />
+                                    <Form type={"file"}  name={'Image'}  onChange={
+                                        async(e) => 
+                                        {
+                                            const image=e.target.files[0]
+                                            console.log(image)
+                                            const base64=await Base64(image)
+                                            console.log(base64)
+                                            Dispatch(Change({[e.target.name]:base64}))
+                                        }
+                                        }
+                                       />
                                 </Box>
                                 {
                                     BlogPublishButton ?  <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Publish Post</Button> :      <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Update Post</Button>

@@ -13,6 +13,9 @@ export const BlogFormReducer = createSlice({
     }),
     Submit: () => {
       return { Author_Name: "", Title: "", Description: "", Image: "" }
+    },
+    EditPost: (state, action) => {
+      return { ...action.payload }
     }
 
 
@@ -21,5 +24,5 @@ export const BlogFormReducer = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { Change, Submit } = BlogFormReducer.actions
+export const { Change, Submit, EditPost } = BlogFormReducer.actions
 export default BlogFormReducer.reducer

@@ -10,7 +10,7 @@ const { Getallblogs } = require('../Controller/UserController/GetAllBlogs')
 
 router.post('/Signup', SignupController)
 router.post('/Signin', SigninController)
-router.post('/Create/Post', CreatePostMiddleWare, CreatePostController)
+router.post('/Create/Post', CreatePostMiddleWare,CreatePostController)
 router.delete('/Delete/Post', (req, res) => {
 })
 router.put("/Update/Post", (req, res) => {

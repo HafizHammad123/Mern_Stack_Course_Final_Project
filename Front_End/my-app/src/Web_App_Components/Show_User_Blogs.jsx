@@ -6,6 +6,7 @@ import { useSelector ,useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
 import { OpenModal , ChangeButton } from '../Redux/BlogsReducers/BlogRelatedReducer'
+import { EditPost } from '../Redux/BlogsReducers/BlogFormreducer1'
 export default function ShowUserOwnBlogs() {
   const Dispatch=useDispatch()
   const StorePost = useSelector((state) => state.StorePost)
@@ -69,6 +70,7 @@ export default function ShowUserOwnBlogs() {
               {
                 Dispatch(OpenModal())
                 Dispatch(ChangeButton())
+                Dispatch(EditPost(PostItem))
               }}>
                 <EditIcon />
               </IconButton>

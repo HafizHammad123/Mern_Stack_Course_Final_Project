@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 // defiining User_Post Schema
 const Blog_Post_Schema = new mongoose.Schema({
     Author_Name: { type: String },
@@ -12,8 +13,10 @@ const Blog_Post_Schema = new mongoose.Schema({
 const Blog_Post = mongoose.model('Blog_Post', Blog_Post_Schema)
 const CreatePostModelFunction = async (CreatePostData) => {
 
+    const date = moment(new Date()).format('YYYY-MM-DD')
     const { Author_Name, Title, Description, Image } = CreatePostData.BlogData;
     const { ID } = CreatePostData
+    console.log(Image)
 
     const InserPost = new Blog_Post({
         Author_Name: Author_Name,
@@ -21,7 +24,7 @@ const CreatePostModelFunction = async (CreatePostData) => {
         Description: Description,
         Image: Image,
         UserID: ID,
-        Publish_Date: Date()
+        Publish_Date: date
 
     })
     const result = await InserPost.save()

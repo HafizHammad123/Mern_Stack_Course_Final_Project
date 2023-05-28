@@ -2,6 +2,8 @@ const { CreatePostModelFunction } = require('../../Models/User_PostModel')
 const Jwt = require('jsonwebtoken')
 const Secret_Key = "Signin"
 
+
+
 const CreatePostMiddleWare = (req, res, next) => {
     if (req.headers.authorization) {
         const Token = req.headers.authorization.split(' ')
@@ -21,7 +23,8 @@ const CreatePostMiddleWare = (req, res, next) => {
 }
 
 const CreatePostController = (req, res) => {
-    CreatePostModelFunction(req.body).then((data) => res.send(data))
+    
+    CreatePostModelFunction(req.body).then((data) => res.send(data)).catch((error)=>console.log(error))
 
 }
-module.exports = { CreatePostMiddleWare, CreatePostController }
+module.exports = { CreatePostMiddleWare, CreatePostController}
