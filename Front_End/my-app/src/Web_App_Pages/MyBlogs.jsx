@@ -13,9 +13,11 @@ import { OpenModal, BlogPublished } from '../Redux/BlogsReducers/BlogRelatedRedu
 import { Change } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
 import { CreatePostStoreForSearch,FetchAllBlogsForSearch} from '../Redux/BlogsReducers/StoreBlogsPostSearch'
+import { useState } from "react";
 
 export default function MyBlogs() {
     const Dispatch = useDispatch()
+    const [StoreFilterPost,UpdateFilterPost]=useState('')
     const BlogFieldData = useSelector((state) => state.BlogForm)
     const BlogRelatedStates = useSelector((state) => state.BlogRelatedStates)
     const StoreForSearchingBlog=useSelector((state)=>state.StoreForSearchingBlog)
@@ -103,6 +105,18 @@ export default function MyBlogs() {
             console.log(error)
         }
     }
+    const Changevalue=(e)=>
+    {
+        console.log(e.target.value)
+    }
+    const KeyDown=(e)=>
+    {
+     if(e.key=='Enter')
+     {
+        console.log(e.key)
+     }  
+     
+    }
 
     return <>
         <HeaderWebApp />
@@ -111,7 +125,7 @@ export default function MyBlogs() {
             <SideNavWebApp />
             <Stack sx={{ width: { lg: "80%", md: "75%", xs: "100%" } }}  >
                 <Stack display={"flex"} flexDirection={"column"} gap={2} paddingY={"10px"} paddingX={"10px"}>
-                    <TextField label="Search" type={"search"}  />
+                    <TextField label="Search" type={"search"} onChange={Changevalue} onKeyDown={KeyDown}/>
                     <Stack flexDirection={"row"} gap={1}>
                         <Avatar></Avatar>
                         <Box onClick={() => Dispatch(OpenModal())} sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>

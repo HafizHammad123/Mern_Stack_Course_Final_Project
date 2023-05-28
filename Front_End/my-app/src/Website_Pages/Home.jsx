@@ -13,12 +13,7 @@ export default function Home() {
           About Website
         </Typography>
         <Typography variant="body1" fontSize={"18px"} color="black" fontFamily={"Raleway"} sx={{textAlign:{sm:"justify",xs:"left"}}}>
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+        A blogging website is a platform that enables individuals to share their thoughts, ideas, experiences and expertise with a wider audience through written content. These websites provide a space for bloggers to create and publish articles commonly known as blog posts, on various topics according to their interest and fields. 
         </Typography>
 
 
@@ -36,12 +31,12 @@ export default function Home() {
           About How we can create her own Blog
         </Typography>
         <Typography variant="body1" fontSize={"18px"} color="black" fontFamily={"Raleway"} sx={{textAlign:{sm:"justify",xs:"left"}}}>
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+      1) Visit the website <br />
+      2) Look for the Sign-up Button <br />
+      3) Register yourself by putting E-mail, Name and Password <br />
+      4)  Verify and acces your Account <br />
+    <h3>Note</h3>
+    <p>Please note that the  above steps are a general guidelines, and it may differ from website to website</p>
         </Typography>
       </Box>
     </Stack>
