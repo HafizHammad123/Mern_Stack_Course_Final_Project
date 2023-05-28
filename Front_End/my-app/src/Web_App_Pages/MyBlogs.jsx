@@ -9,19 +9,22 @@ import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from "react-redux";
 import { Submit } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { CreatePostStore } from '../Redux/BlogsReducers/StoreBlogReducer'
-import { OpenModal ,BlogPublished } from '../Redux/BlogsReducers/BlogRelatedReducer'
+import { OpenModal, BlogPublished } from '../Redux/BlogsReducers/BlogRelatedReducer'
 import { Change } from '../Redux/BlogsReducers/BlogFormreducer1'
+import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
+import { CreatePostStoreForSearch,FetchAllBlogsForSearch} from '../Redux/BlogsReducers/StoreBlogsPostSearch'
 
 export default function MyBlogs() {
     const Dispatch = useDispatch()
     const BlogFieldData = useSelector((state) => state.BlogForm)
-    const BlogRelatedStates=useSelector((state) => state.BlogRelatedStates)
-    console.log(BlogFieldData)
-    const { ModalStates,BlogPublishButton }=BlogRelatedStates
-    const { Author_Name, Title, Description, Image } = BlogFieldData
-    console.log(Image)
+    const BlogRelatedStates = useSelector((state) => state.BlogRelatedStates)
+    const StoreForSearchingBlog=useSelector((state)=>state.StoreForSearchingBlog)
+    const { ModalStates, BlogPublishButton } = BlogRelatedStates
+    const { Author_Name, Title, Description } = BlogFieldData
     const token = JSON.parse(localStorage.getItem('SecretKey'));
     const SecretToken = `Bearer ${token.SecretToken}`
+
+    console.log(StoreForSearchingBlog)
 
     const handleClose = () => {
         Dispatch(BlogPublished())
@@ -43,11 +46,10 @@ export default function MyBlogs() {
     const PublishPost = async (e) => {
         e.preventDefault()
         try {
-         debugger
             const Response = await fetch('http://localhost:8000/User/Create/Post',
                 {
                     method: 'POST',
-                    body: JSON.stringify({BlogData:BlogFieldData,ID:token.ID}),
+                    body: JSON.stringify({ BlogData: BlogFieldData, ID: token.ID }),
                     headers:
                     {
                         "Content-Type": "application/json",
@@ -59,20 +61,47 @@ export default function MyBlogs() {
             Dispatch(BlogPublished())
             Dispatch(Submit())
             Dispatch(CreatePostStore(data))
+            Dispatch(CreatePostStoreForSearch(data))
+            
 
         } catch (error) {
             console.log(error)
         }
 
     }
-    const Base64=(file)=>
-    {
+    const Base64 = (file) => {
         return new Promise((resolve, reject) => {
-            const reader=new FileReader();
+            const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload=()=>{resolve(reader.result)};
-            reader.onerror=(error)=>reject(error)
+            reader.onload = () => { resolve(reader.result) };
+            reader.onerror = (error) => reject(error)
         })
+    }
+    const UpdatePost=async(e)=>
+    {
+        e.preventDefault()
+        try {
+            const Response = await fetch('http://localhost:8000/User/Update/Post',
+                {
+                    method: 'PUT',
+                    body: JSON.stringify({ BlogData: BlogFieldData }),
+                    headers:
+                    {
+                        "Content-Type": "application/json",
+                        'Authorization': SecretToken
+                    }
+
+                })
+            const data = await Response.json()
+            console.log(data.findall)
+            Dispatch(BlogPublished())
+            Dispatch(Submit())
+            Dispatch(FetchAllBlogs(data.findall))
+            Dispatch(FetchAllBlogsForSearch(data.findall))
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return <>
@@ -82,10 +111,10 @@ export default function MyBlogs() {
             <SideNavWebApp />
             <Stack sx={{ width: { lg: "80%", md: "75%", xs: "100%" } }}  >
                 <Stack display={"flex"} flexDirection={"column"} gap={2} paddingY={"10px"} paddingX={"10px"}>
-                    <TextField label="Search" type={"search"} />
+                    <TextField label="Search" type={"search"}  />
                     <Stack flexDirection={"row"} gap={1}>
                         <Avatar></Avatar>
-                        <Box onClick={() =>Dispatch(OpenModal())} sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>
+                        <Box onClick={() => Dispatch(OpenModal())} sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>
                         <Modal
                             open={ModalStates}
                             onClose={handleClose}
@@ -96,26 +125,23 @@ export default function MyBlogs() {
                                 <Typography variant="h5" display={"flex"} justifyContent={"center"} fontFamily={"Raleway"} fontWeight={"600"} >
                                     Create Post
                                 </Typography>
-                                <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2} onSubmit={PublishPost}>
-                                    <Form label={"Author Name"} value={Author_Name} name={'Author_Name'}  onChange={(e)=>Dispatch(Change({[e.target.name]:e.target.value}))}/>
-                                    <Form label={"Title"} value={Title} name={'Title'}  onChange={(e)=>Dispatch(Change({[e.target.name]:e.target.value}))} />
-                                    <Form label={"Description"} value={Description} name={'Description'}  onChange={(e)=>Dispatch(Change({[e.target.name]:e.target.value}))} />
-                                    <Form type={"file"}  name={'Image'}  onChange={
-                                        async(e) => 
-                                        {
-                                            const image=e.target.files[0]
-                                            console.log(image)
-                                            const base64=await Base64(image)
-                                            console.log(base64)
-                                            Dispatch(Change({[e.target.name]:base64}))
+                                <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2} onSubmit={BlogPublishButton ? PublishPost:UpdatePost}>
+                                    <Form label={"Author Name"} value={Author_Name} name={'Author_Name'} onChange={(e) => Dispatch(Change({ [e.target.name]: e.target.value }))} />
+                                    <Form label={"Title"} value={Title} name={'Title'} onChange={(e) => Dispatch(Change({ [e.target.name]: e.target.value }))} />
+                                    <Form label={"Description"} value={Description} name={'Description'} onChange={(e) => Dispatch(Change({ [e.target.name]: e.target.value }))} />
+                                    <Form type={"file"} name={'Image'} onChange={
+                                        async (e) => {
+                                            const image = e.target.files[0]
+                                            const base64 = await Base64(image)
+                                            Dispatch(Change({ [e.target.name]: base64 }))
                                         }
-                                        }
-                                       />
+                                    }
+                                    />
                                 </Box>
                                 {
-                                    BlogPublishButton ?  <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Publish Post</Button> :      <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Update Post</Button>
+                                    BlogPublishButton ? <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Publish Post</Button> : <Button variant="contained" color="secondary" sx={{ alignSelf: "flex-end" }} type="submit" form="BlogForm">Update Post</Button>
                                 }
-                           
+
 
 
 

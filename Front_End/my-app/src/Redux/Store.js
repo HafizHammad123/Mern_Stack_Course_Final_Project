@@ -5,6 +5,8 @@ import Loginreducer from './AuthReducers/LoginReducers'
 import ProtectRoutes from './ProtectRoutesReducers/ProtectRoutes'
 import StoreBlogPostData from './BlogsReducers/StoreBlogReducer'
 import BlogRelatedReducer from './BlogsReducers/BlogRelatedReducer'
+import StoreBlogPostForSearch from './BlogsReducers/StoreBlogsPostSearch'
+
 
 export const  Store=configureStore({
   reducer: {
@@ -13,6 +15,7 @@ export const  Store=configureStore({
     Login:Loginreducer,
     Routes:ProtectRoutes,
     StorePost:StoreBlogPostData,
-    BlogRelatedStates:BlogRelatedReducer
+    BlogRelatedStates:BlogRelatedReducer,
+    StoreForSearchingBlog:StoreBlogPostForSearch
   },
 })

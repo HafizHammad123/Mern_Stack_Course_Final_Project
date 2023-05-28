@@ -16,8 +16,6 @@ const CreatePostModelFunction = async (CreatePostData) => {
     const date = moment(new Date()).format('YYYY-MM-DD')
     const { Author_Name, Title, Description, Image } = CreatePostData.BlogData;
     const { ID } = CreatePostData
-    console.log(Image)
-
     const InserPost = new Blog_Post({
         Author_Name: Author_Name,
         Title: Title,

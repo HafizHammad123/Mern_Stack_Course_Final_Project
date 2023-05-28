@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
 import { OpenModal , ChangeButton } from '../Redux/BlogsReducers/BlogRelatedReducer'
 import { EditPost } from '../Redux/BlogsReducers/BlogFormreducer1'
+import { FetchAllBlogsForSearch } from '../Redux/BlogsReducers/StoreBlogsPostSearch'
 export default function ShowUserOwnBlogs() {
   const Dispatch=useDispatch()
   const StorePost = useSelector((state) => state.StorePost)
@@ -29,6 +30,8 @@ export default function ShowUserOwnBlogs() {
           })
         const FetchAllData= await Response.json()
         Dispatch(FetchAllBlogs(FetchAllData))
+        Dispatch(FetchAllBlogsForSearch(FetchAllData))
+
         
       } catch (error) {
         console.log(error)
@@ -39,6 +42,27 @@ export default function ShowUserOwnBlogs() {
   },[ ]);
   const style = {
     flex: { lg: "400px", md: "250px", sm: "300px" },
+  }
+  const DeletePost=async(DeleteItem)=>
+  {
+    try {
+      const Response = await fetch(`http://localhost:8000/User/Delete/Post/${DeleteItem._id}/${DeleteItem.UserID}`,
+        {
+          method: "DELETE",
+          headers:
+          {
+            "Content-Type": "application/json",
+            'Authorization': SecretToken
+          }
+
+        })
+      const FetchAllData= await Response.json()
+      Dispatch(FetchAllBlogs(FetchAllData.findall))
+      Dispatch(FetchAllBlogsForSearch(FetchAllData.findall))
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
   return <>
     {
@@ -74,7 +98,7 @@ export default function ShowUserOwnBlogs() {
               }}>
                 <EditIcon />
               </IconButton>
-              <IconButton aria-label="share">
+              <IconButton aria-label="share" onClick={()=>DeletePost(PostItem)}>
                 <DeleteIcon />
               </IconButton>
             </CardActions>
