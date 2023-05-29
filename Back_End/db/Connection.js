@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const connectdb = async () => {
-    try {
+    try {  
         await mongoose.connect('mongodb://127.0.0.1:27017/Blogs')
         console.log("Connected")
     } catch (error) {
@@ -10,5 +10,8 @@ const connectdb = async () => {
 
 
 }
+
+
+
 
 module.exports = { connectdb }

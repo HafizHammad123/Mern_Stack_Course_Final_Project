@@ -17,7 +17,8 @@ import { useState } from "react";
 
 export default function MyBlogs() {
     const Dispatch = useDispatch()
-    const [StoreFilterPost,UpdateFilterPost]=useState('')
+    // const [StoreFilterPost,UpdateFilterPost]=useState('')
+    const [storesearchvalue,updatesearchvalue]=useState('')
     const BlogFieldData = useSelector((state) => state.BlogForm)
     const BlogRelatedStates = useSelector((state) => state.BlogRelatedStates)
     const StoreForSearchingBlog=useSelector((state)=>state.StoreForSearchingBlog)
@@ -25,8 +26,6 @@ export default function MyBlogs() {
     const { Author_Name, Title, Description } = BlogFieldData
     const token = JSON.parse(localStorage.getItem('SecretKey'));
     const SecretToken = `Bearer ${token.SecretToken}`
-
-    console.log(StoreForSearchingBlog)
 
     const handleClose = () => {
         Dispatch(BlogPublished())
@@ -107,16 +106,33 @@ export default function MyBlogs() {
     }
     const Changevalue=(e)=>
     {
-        console.log(e.target.value)
+        updatesearchvalue(e.target.value)
+        
     }
     const KeyDown=(e)=>
     {
-     if(e.key=='Enter')
+     if(e.key==='Enter')
      {
-        console.log(e.key)
+        const return_arr = StoreForSearchingBlog.filter(Element => {
+            return Element.Author_Name.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1
+          })
+          console.log(return_arr)
+        Dispatch(FetchAllBlogs(return_arr))
      }  
+     else if(e.key==='Backspace')
+     {
+        const value=e.target.value
+        const slice_data=value.slice(0,value.length-1)
+        console.log(slice_data)
+        const return_arr = StoreForSearchingBlog.filter(Element => {
+            return Element.Author_Name.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1
+          })
+          console.log(return_arr)
+        Dispatch(FetchAllBlogs(return_arr))
+     }
      
     }
+    
 
     return <>
         <HeaderWebApp />
@@ -167,8 +183,10 @@ export default function MyBlogs() {
                     </Stack>
                     <Box display={"flex"} flexDirection={"row"} gap={3} flexWrap={"wrap"}>
                         <ShowUserOwnBlogs />
-                    </Box>
 
+                     
+                    </Box>
+                
 
                 </Stack>
 
@@ -176,6 +194,8 @@ export default function MyBlogs() {
 
             </Stack>
         </Stack>
+
+       
         <FooterWebApp />
     </>
 }

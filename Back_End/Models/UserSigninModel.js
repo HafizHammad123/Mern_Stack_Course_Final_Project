@@ -15,7 +15,6 @@ const SigninModel = async (body) => {
             }
             else {
                 const Secret_Token = Jwt.sign({}, Secret_Key)
-                Jwt.decode()
                 return { ID: res[0]._id, SecretToken: Secret_Token }
             }
         }

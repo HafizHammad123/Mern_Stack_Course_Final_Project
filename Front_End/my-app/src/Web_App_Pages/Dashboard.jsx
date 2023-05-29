@@ -31,15 +31,6 @@ export default function Dashboard() {
                        
 
                     </Box>
-                    {/* <Box component={"div"} onClick={() => {
-                        updatepostwhow(false)
-                        updatecommentshow(false)
-                        updatelikeshow(true)
-                    }} sx={{ flex: { md: "250px", lg: "250px", xs: "300px" }, backgroundColor: "#b1b1b1", fontWeight: "500", cursor: "pointer" }} paddingX={2} paddingY={3} display={"flex"} justifyContent={"space-between"}>
-                        <Box>Total Likes</Box>
-                        <Box>5</Box>
-
-                    </Box> */}
 
                 </Box>
                 {

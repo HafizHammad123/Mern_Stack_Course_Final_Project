@@ -15,10 +15,10 @@ app.use(express.json());
 // app.use(express.urlencoded({limit: '25mb'}));
 connectdb()
 
-// CALL USER MODULE HERE
 
-  
+// CALL USER MODULE HERE
 app.use('/User',User)
+
 app.listen(8000,()=>
 {
     console.log("server is in running form")

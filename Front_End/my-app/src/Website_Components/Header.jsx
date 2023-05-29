@@ -27,6 +27,7 @@ export default function Header() {
     const [AccountNotExits, UpdateAccountNotExits] = useState(false)
     const [SimepleSignup, updateSimpleSign] = useState(true)
 
+   
     const SubmitSignup = async (e) => {
         e.preventDefault()
         try {

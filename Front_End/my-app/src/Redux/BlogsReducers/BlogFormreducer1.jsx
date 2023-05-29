@@ -15,6 +15,7 @@ export const BlogFormReducer = createSlice({
       return { Author_Name: "", Title: "", Description: "", Image: "" }
     },
     EditPost: (state, action) => {
+      console.log(action.payload)
       return { ...action.payload }
     }
 

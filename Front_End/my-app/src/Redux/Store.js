@@ -6,6 +6,9 @@ import ProtectRoutes from './ProtectRoutesReducers/ProtectRoutes'
 import StoreBlogPostData from './BlogsReducers/StoreBlogReducer'
 import BlogRelatedReducer from './BlogsReducers/BlogRelatedReducer'
 import StoreBlogPostForSearch from './BlogsReducers/StoreBlogsPostSearch'
+import FetchUserBlog from './FetchBlogs/fetchblogreducer'
+import StoreAllUserBlogs from './FetchBlogs/StoreAllUserblogs'
+import CopyUserFetchBlog from './FetchBlogs/Copyoffetchblogreducer'
 
 
 export const  Store=configureStore({
@@ -16,6 +19,9 @@ export const  Store=configureStore({
     Routes:ProtectRoutes,
     StorePost:StoreBlogPostData,
     BlogRelatedStates:BlogRelatedReducer,
-    StoreForSearchingBlog:StoreBlogPostForSearch
+    StoreForSearchingBlog:StoreBlogPostForSearch,
+    FetchBlogClient:FetchUserBlog,
+    StoreAllUserBlogs:StoreAllUserBlogs,
+    CopyFetchBlogForRendering:CopyUserFetchBlog
   },
 })

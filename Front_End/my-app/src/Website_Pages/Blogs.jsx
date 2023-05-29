@@ -1,11 +1,18 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import Banner from "../Website_Components/Banner";
 import Footer from "../Website_Components/Footer";
 import { Container, Stack, Box } from "@mui/system";
-import { Button, Typography } from "@mui/material";
+import { Button, Pagination, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { StoreFetchUserBlog } from '../Redux/FetchBlogs/fetchblogreducer'
+import { StoreAllUserBlogsForSearch } from '../Redux/FetchBlogs/StoreAllUserblogs'
+import { Copyforrendering } from '../Redux/FetchBlogs/Copyoffetchblogreducer'
 export default function Blogs() {
-    const [Post, Update_Post] = useState([])
+    const FetchUserClient = useSelector((state) => state.FetchBlogClient)
+    // const StoreAllUserBlogs = useSelector((state) => state.StoreAllUserBlogs)
+    // const CopyFetchBlogForRendering = useSelector((state) => state.CopyFetchBlogForRendering)
+    const Dispatch = useDispatch()
     const Navigate = useNavigate()
     useEffect(() => {
         localStorage.removeItem('PostDetail')
@@ -18,7 +25,9 @@ export default function Blogs() {
                     throw new Error("error")
                 }
                 const actual_res = await response.json()
-                Update_Post([...actual_res])
+                Dispatch(StoreFetchUserBlog(actual_res.LatestBlogs))
+                Dispatch(StoreAllUserBlogsForSearch(actual_res.FindAllBlog))
+                Dispatch(Copyforrendering(actual_res.LatestBlogs))
 
             } catch (error) {
                 console.log(error)
@@ -34,14 +43,53 @@ export default function Blogs() {
         localStorage.setItem("PostDetail", JSON.stringify(post_detail))
         Navigate('/Post_Detail')
     }
+    const ChangePagination = async (e) => {
+        if (e.target.textContent === "1") {
+            try {
+                const response = await fetch('http://localhost:8000/User/All/Blogs', {
+                    header: 'content-type: application/json'
+                })
+                if (response.status !== 200) {
+                    throw new Error("error")
+                }
+                const actual_res = await response.json()
+                console.log(actual_res.LatestBlogs)
+                Dispatch(StoreFetchUserBlog(actual_res.LatestBlogs))
+                Dispatch(StoreAllUserBlogsForSearch(actual_res.FindAllBlog))
+                Dispatch(Copyforrendering(actual_res.LatestBlogs))
 
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+        else if (e.target.textContent === '2') {
+            try {
+                const response = await fetch('http://localhost:8000/User/Pagination', {
+                    header: 'content-type: application/json'
+                })
+                if (response.status !== 200) {
+                    throw new Error("error")
+                }
+                const actual_res = await response.json()
+                Dispatch(StoreFetchUserBlog(actual_res.OldBlogs))
+                Dispatch(StoreAllUserBlogsForSearch(actual_res.FindAllBlog))
+                Dispatch(Copyforrendering(actual_res.OldBlogs))
+
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+
+    }
 
     return <>
         <Banner></Banner>
-        <Stack marginY={2} sx={{ backgroundColor: "#ababab73" }}>
+        <Stack marginY={2} marginBottom={2} sx={{ backgroundColor: "#ababab73" }}>
             <Container sx={{ display: "flex", flexWrap: "wrap", columnGap: "8px", rowGap: "10px", paddingX: { sm: "0px" }, paddingY: '20px' }}>
                 {
-                    Post.map(Post_Items =>
+                    FetchUserClient.map(Post_Items =>
                     (
                         <Fragment>
                             <Stack p={2} rowGap={2} fontFamily={"Raleway"} sx={{ backgroundColor: "#ffff", flex: { md: "360px" } }} >
@@ -67,6 +115,9 @@ export default function Blogs() {
                     ))
                 }
             </Container>
+            <Box display={"flex"} justifyContent={"center"} marginBottom={2}>
+                <Pagination count={2} onChange={ChangePagination} />
+            </Box>
         </Stack>
         <Footer></Footer>
 
