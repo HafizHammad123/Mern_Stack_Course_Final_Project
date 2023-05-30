@@ -28,24 +28,24 @@ export default function Dashboard() {
                         updatecommentshow(true)
                     }} sx={{ flex: { md: "250px", lg: "250px", xs: "300px" }, backgroundColor: "#b1b1b1", fontWeight: "500", cursor: "pointer" }} paddingX={2} paddingY={3} display={"flex"} justifyContent={"space-between"}>
                         <Box>Rating</Box>
-                       
+
 
                     </Box>
 
                 </Box>
                 {
                     showpost ?
-                        <Box sx={{ p: { sm: 2, xs: 1 }}} display={"flex"} flexWrap={"wrap"} gap={2}>
+                        <Box sx={{ p: { sm: 2, xs: 1 } }} display={"flex"} flexWrap={"wrap"} gap={2}>
                             {<UserOwnLatestPost />}
-                        </Box> 
+                        </Box>
                         : null
                 }
                 {
                     showcomment ?
                         <Box p={2} >
-                           <RatingBasicTable/>
+                            <RatingBasicTable />
                         </Box>
-                         : null
+                        : null
                 }
 
 

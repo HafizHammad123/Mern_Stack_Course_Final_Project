@@ -125,7 +125,7 @@ export default function MyBlogs() {
         const slice_data=value.slice(0,value.length-1)
         console.log(slice_data)
         const return_arr = StoreForSearchingBlog.filter(Element => {
-            return Element.Author_Name.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1
+            return Element.Author_Name.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1
           })
           console.log(return_arr)
         Dispatch(FetchAllBlogs(return_arr))

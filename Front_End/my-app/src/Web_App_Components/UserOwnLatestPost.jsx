@@ -1,6 +1,5 @@
 import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Image from '../Website_Components/Images/Blogging.jpg'
 export default function UserOwnLatestPost() {
   const [LatestPost, UpdateLatestPost] = useState([])
   const token = JSON.parse(localStorage.getItem('SecretKey'));
