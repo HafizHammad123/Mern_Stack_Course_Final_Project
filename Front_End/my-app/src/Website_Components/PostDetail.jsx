@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "./Banner";
 import Footer from "./Footer";
-import { Stack, Box, Typography, TextField, IconButton, Button } from "@mui/material";
+import { Stack, Box, Typography, TextField, IconButton, Button, Avatar } from "@mui/material";
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Link } from "react-router-dom";
 
 export default function PostDetail() {
-    const [PostDetail] = useState([JSON.parse(localStorage.getItem('PostDetail'))])
+    const [PostDetail, UpdatePostDetail] = useState([JSON.parse(localStorage.getItem('PostDetail'))])
+    const [LatestPost, UpdateLatestPost] = useState([])
+    useEffect(() => {
+        const Post = JSON.parse(localStorage.getItem('PostDetail'))
+        const UserID = Post.UserID
+        const CallRelatedThreeLatestPost = async () => {
+            const response = await fetch(`http://localhost:8000/User/LatestThreePost/${UserID}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                })
+            const data = await response.json()
+            UpdateLatestPost([...data])
+
+        }
+        CallRelatedThreeLatestPost()
+    }, [])
+    const LatestPostDetail = (item) => {
+        localStorage.setItem("PostDetail", JSON.stringify(item))
+        UpdatePostDetail([item])
+    }
     return <>
         <Banner />
-        <Stack flexDirection={"row"} flexWrap={"wrap"} >
-
+        <Stack flexDirection={"row"} flexWrap={"wrap"} position={"relative"} >
             <Box flex={"415px"} p={2} display={"flex"} flexDirection={"column"} fontFamily={"Raleway"} rowGap={2} >
                 {
                     PostDetail.map(Full_Detail =>
@@ -55,8 +75,23 @@ export default function PostDetail() {
                     ))
                 }
             </Box>
-            <Box flex={"415px"} p={2} display={"flex"} sx={{ justifyContent: { md: "flex-end" } }}>
-                <Box sx={{ width: { md: "340px", xs: "100%" } }} fontFamily={"Raleway"} border={1} textAlign={"center"}>Related Post</Box>
+            <Box flex={"415px"} p={2} display={"flex"} justifyContent={"flex-end"} >
+                <Box display={"flex"} flexDirection={"column"} gap={2} p={1} height={"440px"} position={"sticky"} top={2} sx={{ width: { md: "440px", xs: "100%" }, minHeight: "40px", backgroundColor: "#e6e6e7a1" }} fontFamily={"Raleway"} textAlign={"center"} >
+
+                    <Box borderBottom={1} p={1} fontWeight={600} fontSize={"20px"} >User Latests Post</Box>
+                    {
+                        LatestPost.map(items =>
+                        (
+                            <Box display={"flex"} borderBottom={1} alignItems={"center"} gap={2} p={1} sx={{ cursor: "pointer" }} component={"div"} onClick={() => LatestPostDetail(items)}>
+                                <Box><Avatar src={items.Image}></Avatar></Box>
+                                <Box flex={1} textAlign={"left"}>{items.Title}</Box>
+                            </Box>
+
+                        ))
+                    }
+
+
+                </Box>
             </Box>
 
         </Stack>

@@ -12,16 +12,15 @@ import { CreatePostStore } from '../Redux/BlogsReducers/StoreBlogReducer'
 import { OpenModal, BlogPublished } from '../Redux/BlogsReducers/BlogRelatedReducer'
 import { Change } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
-import { CreatePostStoreForSearch,FetchAllBlogsForSearch} from '../Redux/BlogsReducers/StoreBlogsPostSearch'
+import { CreatePostStoreForSearch, FetchAllBlogsForSearch } from '../Redux/BlogsReducers/StoreBlogsPostSearch'
 import { useState } from "react";
 
 export default function MyBlogs() {
     const Dispatch = useDispatch()
-    // const [StoreFilterPost,UpdateFilterPost]=useState('')
-    const [storesearchvalue,updatesearchvalue]=useState('')
+    const [storesearchvalue, updatesearchvalue] = useState('')
     const BlogFieldData = useSelector((state) => state.BlogForm)
     const BlogRelatedStates = useSelector((state) => state.BlogRelatedStates)
-    const StoreForSearchingBlog=useSelector((state)=>state.StoreForSearchingBlog)
+    const StoreForSearchingBlog = useSelector((state) => state.StoreForSearchingBlog)
     const { ModalStates, BlogPublishButton } = BlogRelatedStates
     const { Author_Name, Title, Description } = BlogFieldData
     const token = JSON.parse(localStorage.getItem('SecretKey'));
@@ -63,7 +62,7 @@ export default function MyBlogs() {
             Dispatch(Submit())
             Dispatch(CreatePostStore(data))
             Dispatch(CreatePostStoreForSearch(data))
-            
+
 
         } catch (error) {
             console.log(error)
@@ -78,8 +77,7 @@ export default function MyBlogs() {
             reader.onerror = (error) => reject(error)
         })
     }
-    const UpdatePost=async(e)=>
-    {
+    const UpdatePost = async (e) => {
         e.preventDefault()
         try {
             const Response = await fetch('http://localhost:8000/User/Update/Post',
@@ -104,35 +102,31 @@ export default function MyBlogs() {
             console.log(error)
         }
     }
-    const Changevalue=(e)=>
-    {
+    const Changevalue = (e) => {
         updatesearchvalue(e.target.value)
-        
+
     }
-    const KeyDown=(e)=>
-    {
-     if(e.key==='Enter')
-     {
-        const return_arr = StoreForSearchingBlog.filter(Element => {
-            return Element.Author_Name.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1
-          })
-          console.log(return_arr)
-        Dispatch(FetchAllBlogs(return_arr))
-     }  
-     else if(e.key==='Backspace')
-     {
-        const value=e.target.value
-        const slice_data=value.slice(0,value.length-1)
-        console.log(slice_data)
-        const return_arr = StoreForSearchingBlog.filter(Element => {
-            return Element.Author_Name.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1
-          })
-          console.log(return_arr)
-        Dispatch(FetchAllBlogs(return_arr))
-     }
-     
+    const KeyDown = (e) => {
+        if (e.key === 'Enter') {
+            const return_arr = StoreForSearchingBlog.filter(Element => {
+                return Element.Author_Name.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1
+            })
+            console.log(return_arr)
+            Dispatch(FetchAllBlogs(return_arr))
+        }
+        else if (e.key === 'Backspace') {
+            const value = e.target.value
+            const slice_data = value.slice(0, value.length - 1)
+            console.log(slice_data)
+            const return_arr = StoreForSearchingBlog.filter(Element => {
+                return Element.Author_Name.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Title.toLowerCase().indexOf(slice_data.toLowerCase()) !== -1 || Element.Description.toLowerCase().indexOf(storesearchvalue.toLowerCase()) !== -1
+            })
+            console.log(return_arr)
+            Dispatch(FetchAllBlogs(return_arr))
+        }
+
     }
-    
+
 
     return <>
         <HeaderWebApp />
@@ -141,7 +135,7 @@ export default function MyBlogs() {
             <SideNavWebApp />
             <Stack sx={{ width: { lg: "80%", md: "75%", xs: "100%" } }}  >
                 <Stack display={"flex"} flexDirection={"column"} gap={2} paddingY={"10px"} paddingX={"10px"}>
-                    <TextField label="Search" type={"search"} onChange={Changevalue} onKeyDown={KeyDown}/>
+                    <TextField label="Search" type={"search"} onChange={Changevalue} onKeyDown={KeyDown} />
                     <Stack flexDirection={"row"} gap={1}>
                         <Avatar></Avatar>
                         <Box onClick={() => Dispatch(OpenModal())} sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>
@@ -155,7 +149,7 @@ export default function MyBlogs() {
                                 <Typography variant="h5" display={"flex"} justifyContent={"center"} fontFamily={"Raleway"} fontWeight={"600"} >
                                     Create Post
                                 </Typography>
-                                <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2} onSubmit={BlogPublishButton ? PublishPost:UpdatePost}>
+                                <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2} onSubmit={BlogPublishButton ? PublishPost : UpdatePost}>
                                     <Form label={"Author Name"} value={Author_Name} name={'Author_Name'} onChange={(e) => Dispatch(Change({ [e.target.name]: e.target.value }))} />
                                     <Form label={"Title"} value={Title} name={'Title'} onChange={(e) => Dispatch(Change({ [e.target.name]: e.target.value }))} />
                                     <Form label={"Description"} value={Description} name={'Description'} onChange={(e) => Dispatch(Change({ [e.target.name]: e.target.value }))} />
@@ -163,6 +157,7 @@ export default function MyBlogs() {
                                         async (e) => {
                                             const image = e.target.files[0]
                                             const base64 = await Base64(image)
+                                            console.log(base64)
                                             Dispatch(Change({ [e.target.name]: base64 }))
                                         }
                                     }
@@ -183,10 +178,8 @@ export default function MyBlogs() {
                     </Stack>
                     <Box display={"flex"} flexDirection={"row"} gap={3} flexWrap={"wrap"}>
                         <ShowUserOwnBlogs />
-
-                     
                     </Box>
-                
+
 
                 </Stack>
 
@@ -194,8 +187,6 @@ export default function MyBlogs() {
 
             </Stack>
         </Stack>
-
-       
         <FooterWebApp />
     </>
 }

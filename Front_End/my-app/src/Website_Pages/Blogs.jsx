@@ -10,8 +10,6 @@ import { StoreAllUserBlogsForSearch } from '../Redux/FetchBlogs/StoreAllUserblog
 import { Copyforrendering } from '../Redux/FetchBlogs/Copyoffetchblogreducer'
 export default function Blogs() {
     const FetchUserClient = useSelector((state) => state.FetchBlogClient)
-    // const StoreAllUserBlogs = useSelector((state) => state.StoreAllUserBlogs)
-    // const CopyFetchBlogForRendering = useSelector((state) => state.CopyFetchBlogForRendering)
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
     useEffect(() => {
@@ -92,7 +90,7 @@ export default function Blogs() {
                     FetchUserClient.map(Post_Items =>
                     (
                         <Fragment>
-                            <Stack p={2} rowGap={2} fontFamily={"Raleway"} sx={{ backgroundColor: "#ffff", flex: { md: "360px" } }} >
+                            <Stack component={"div"} className="div"    p={2} rowGap={2} fontFamily={"Raleway"} sx={{ backgroundColor: "#ffff", flex: { md: "360px" } }} >
                                 <Box>{Post_Items.Description}</Box>
                                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
                                     <Box display={"flex"} flexDirection={"column"} rowGap={1}>
@@ -120,7 +118,5 @@ export default function Blogs() {
             </Box>
         </Stack>
         <Footer></Footer>
-
-
     </>
 }

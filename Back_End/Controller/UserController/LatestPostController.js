@@ -26,7 +26,8 @@ const FiveLatestPost=async(req,res)=>
     console.log("hello")
     try {
         const response=await Blog_Post.find({UserID:latestid}).limit(5).sort({$natural:-1}) 
-        res.send(response)
+        const TotalPost=await Blog_Post.find({UserID:latestid})
+        res.send({response:response,TotalPost:TotalPost.length})
 
     } catch (error) {
         res.send(error)

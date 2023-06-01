@@ -1,6 +1,6 @@
 import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-export default function UserOwnLatestPost() {
+export default function UserOwnLatestPost({UpdateTotalPost}) {
   const [LatestPost, UpdateLatestPost] = useState([])
   const token = JSON.parse(localStorage.getItem('SecretKey'));
   const SecretToken = `Bearer ${token.SecretToken}`
@@ -16,7 +16,9 @@ export default function UserOwnLatestPost() {
           }
         })
       const data = await response.json()
-      UpdateLatestPost([...data])
+      UpdateLatestPost([...data.response])
+      UpdateTotalPost(data.TotalPost)
+
 
     }
     FetchLatestFivePost()

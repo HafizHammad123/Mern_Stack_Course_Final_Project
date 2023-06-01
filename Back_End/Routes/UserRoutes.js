@@ -9,7 +9,7 @@ const { UpdatePostController, UpdatePostMiddleWare } = require('../Controller/Us
 const { DeletePostController, DeletePostMiddleware } = require('../Controller/UserController/DeletePostController')
 const { Pagination2 } =require('../Controller/UserController/PanigationController')
 const { FiveLatestPost,FiveLatestPostMiddleware } =require('../Controller/UserController/LatestPostController')
-
+const { LatestThreePost } =require('../Controller/UserController/LatestThreePost')
 router.post('/Signup', SignupController)
 router.post('/Signin', SigninController)
 router.post('/Create/Post', CreatePostMiddleWare, CreatePostController)
@@ -19,11 +19,13 @@ router.get("/Personal/Blog/:id", PersonalBlogMiddleWare, FetchPersonalBlogContro
 router.get("/All/Blogs", Getallblogs)
 router.get("/Pagination",Pagination2)
 router.get("/Five/Latests/Post/:latestid",FiveLatestPostMiddleware,FiveLatestPost)
+router.get("/LatestThreePost/:UserID",LatestThreePost)
 router.post('/EditProfile', (req, res) => {
   res.send("Edit Profile")
 })
 router.post('/ForgetPassword', (req, res) => {
   res.send("Forget Password")
 })
+
 
 module.exports = router

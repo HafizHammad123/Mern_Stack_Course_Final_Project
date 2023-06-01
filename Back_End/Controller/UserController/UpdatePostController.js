@@ -19,7 +19,7 @@ const UpdatePostMiddleWare = (req, res, next) => {
 }
 const UpdatePostController = async (req, res) => {
 
-    try {
+try {
         const { Author_Name, Title, Description, Image, _id, UserID } = req.body.BlogData
 
 
@@ -30,7 +30,7 @@ const UpdatePostController = async (req, res) => {
         res.send({ message: "Successfully Updated", findall: findAll })
     } catch (error) {
         res.send(error)
-    }
+    }    
 
 }
 

@@ -27,7 +27,7 @@ export default function Header() {
     const [AccountNotExits, UpdateAccountNotExits] = useState(false)
     const [SimepleSignup, updateSimpleSign] = useState(true)
 
-   
+
     const SubmitSignup = async (e) => {
         e.preventDefault()
         try {
@@ -120,6 +120,7 @@ export default function Header() {
     const handleClose = () => {
         setopen(false)
         update_sign(true)
+        updateSimpleSign(true)
     }
     const style = {
         position: 'absolute',
@@ -197,8 +198,8 @@ export default function Header() {
                                                     <Button variant="contained" form="Signin" type="submit">Sign in</Button>
                                                     <Box display={"flex"} gap={1} sx={{ flexDirection: { sm: "row", xs: "column" } }} justifyContent={"space-between"}>
 
-                                                        <Box fontFamily={"Arial"} sx={{ textDecoration: "underline", alignSelf: "center", cursor: "pointer" }} onClick={() => updateSimpleSign(false)} >Forgot password</Box>
-                                                        <Box fontFamily={"Arial"} sx={{ alignSelf: "center", textDecoration: "underline", cursor: "pointer", textAlign: "center" }} onClick={() => update_sign(false)}>Don,t have an account? sign up</Box>
+                                                        <Box fontFamily={"Raleway"} sx={{ alignSelf: "center", cursor: "pointer" }} onClick={() => updateSimpleSign(false)} >Forgot password</Box>
+                                                        <Box fontFamily={"Raleway"} sx={{ alignSelf: "center" , cursor: "pointer", textAlign: "center" }} onClick={() => update_sign(false)}>Don,t have an account? sign up</Box>
                                                     </Box>
                                                 </>
                                                 :
@@ -212,6 +213,12 @@ export default function Header() {
                                                         <TextField label="password" type="password" required />
                                                     </Box>
                                                     <Button variant="contained" form="forgetpassword" type="submit">Forget password</Button>
+
+                                                    <Typography  display={"flex"} justifyContent={"flex-end"} fontWeight={"400"}  fontFamily={"Raleway"} component={"div"} sx={{cursor:"pointer"}} onClick={()=>updateSimpleSign(true)}>
+                                                        Don,t Forget Password ? sign in
+                                                    </Typography>
+
+
 
                                                 </>
 
@@ -233,10 +240,9 @@ export default function Header() {
                                         </Box>
                                         <Button variant="contained" type="submit" form={"Signup"} >Sign up</Button>
                                         <Button variant="contained" startIcon={<GoogleIcon />}>Sign up with Google</Button>
-                                        <Box fontFamily={"Arial"} fontWeight={"400"} onClick={() => update_sign(true)} sx={{
+                                        <Box fontFamily={"Raleway"} fontWeight={"400"} onClick={() => update_sign(true)} sx={{
                                             cursor
                                                 : "pointer",
-                                            textDecoration: "underline",
                                             alignSelf: { sm: "flex-end", xs: "center" },
                                             textAlign: "center"
                                         }}>

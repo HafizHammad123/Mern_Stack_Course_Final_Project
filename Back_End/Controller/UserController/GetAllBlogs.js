@@ -3,9 +3,8 @@ const Getallblogs=async(req,res)=>
 {
     try {
         const FindAllBlog = await Blog_Post.find()
-        const data=FindAllBlog.length/2
+        const data=Math.floor(FindAllBlog.length/2)
         const response=await Blog_Post.find().limit(data).sort({$natural:-1}) 
-        console.log(response)
         res.send({FindAllBlog:FindAllBlog,LatestBlogs:response})
 
     } catch (error) {
