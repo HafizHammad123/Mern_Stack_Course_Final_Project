@@ -8,7 +8,7 @@ import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
 import { OpenModal , ChangeButton } from '../Redux/BlogsReducers/BlogRelatedReducer'
 import { EditPost } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { FetchAllBlogsForSearch } from '../Redux/BlogsReducers/StoreBlogsPostSearch'
-export default function ShowUserOwnBlogs() {
+export default function ShowUserOwnBlogs({UpdateHeadingPost}) {
   const Dispatch=useDispatch()
   const StorePost = useSelector((state) => state.StorePost)
   const token = JSON.parse(localStorage.getItem('SecretKey'));
@@ -95,6 +95,7 @@ export default function ShowUserOwnBlogs() {
                 Dispatch(OpenModal())
                 Dispatch(ChangeButton())
                 Dispatch(EditPost(PostItem))
+                UpdateHeadingPost("Update Post")
               }}>
                 <EditIcon />
               </IconButton>
