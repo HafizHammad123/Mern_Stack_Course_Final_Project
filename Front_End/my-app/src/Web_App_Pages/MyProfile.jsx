@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderWebApp from "../Web_App_Components/Header_WebApp";
 import SideNavWebApp from "../Web_App_Components/Side_Navbar";
 import FooterWebApp from "../Web_App_Components/Footer_WebApp";
@@ -57,6 +57,7 @@ export default function MyProfile() {
 
 
     }
+ 
     return <>
         <HeaderWebApp />
         <NavbarMobileWeb />

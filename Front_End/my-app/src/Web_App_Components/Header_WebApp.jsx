@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, Box, Badge, Avatar, Menu, MenuItem } from '@mui/material'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { LoggedOut } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { StoreImagePath,FetchEmpty } from '../Redux/UserProfileImages/UserProfileImages'
 export default function HeaderWebApp() {
     const Dispatch = useDispatch()
     const navigate = useNavigate()
     const UserImage=useSelector((state)=>state.UserImage)
     const [Open, SetOpen] = useState(false)
+    const token = JSON.parse(localStorage.getItem('SecretKey'));
+    const SecretToken = `Bearer ${token.SecretToken}`
+
     const OpenProfile = () => {
         if (!Open) {
             SetOpen(true)
@@ -21,6 +24,32 @@ export default function HeaderWebApp() {
         }
 
     }
+    useEffect(() => {
+        const CallFetchUserProfileApi = async () => {
+            const Response = await fetch(`http://localhost:8000/User/fetch/User/Profile/Image/${token.ID}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': SecretToken
+                    }
+                }
+            )
+            const fetchprofileimage=await Response.json()
+            console.log(fetchprofileimage)
+            if(fetchprofileimage.length > 0)
+            {
+                Dispatch(StoreImagePath(`http://localhost:8000/${fetchprofileimage[0].UserProfile}`))
+            }
+            else 
+            {
+                Dispatch(FetchEmpty())
+            }
+        
+        }
+        CallFetchUserProfileApi()
+
+    }, [])
     return <>
         <AppBar position="sticky" >
             <Toolbar >

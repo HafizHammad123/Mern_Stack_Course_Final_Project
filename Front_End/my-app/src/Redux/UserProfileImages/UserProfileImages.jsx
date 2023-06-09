@@ -9,10 +9,14 @@ export const UserprofileImages=createSlice({
         StoreImagePath:(State,action)=>
         {
            return State=action.payload
+        },
+        FetchEmpty:(state)=>
+        {
+            return state=""
         }
     }
 
 })
 
-export const { StoreImagePath } = UserprofileImages.actions;
+export const { StoreImagePath,FetchEmpty} = UserprofileImages.actions;
 export default UserprofileImages.reducer
