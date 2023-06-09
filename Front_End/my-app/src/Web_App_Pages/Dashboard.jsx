@@ -5,7 +5,6 @@ import FooterWebApp from "../Web_App_Components/Footer_WebApp";
 import NavbarMobileWeb from "../Web_App_Components/Navbar_Mobile";
 import { Stack, Box } from '@mui/material'
 import UserOwnLatestPost from "../Web_App_Components/UserOwnLatestPost";
-import RatingBasicTable from "../Web_App_Components/RatingUserPost";
 export default function Dashboard() {
     const [TotalPost,UpdateTotalPost]=useState('')
     return <>

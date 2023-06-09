@@ -9,6 +9,7 @@ import StoreBlogPostForSearch from './BlogsReducers/StoreBlogsPostSearch'
 import FetchUserBlog from './FetchBlogs/fetchblogreducer'
 import StoreAllUserBlogs from './FetchBlogs/StoreAllUserblogs'
 import CopyUserFetchBlog from './FetchBlogs/Copyoffetchblogreducer'
+import UserprofileImageReducer from './UserProfileImages/UserProfileImages'
 
 
 export const  Store=configureStore({
@@ -22,6 +23,7 @@ export const  Store=configureStore({
     StoreForSearchingBlog:StoreBlogPostForSearch,
     FetchBlogClient:FetchUserBlog,
     StoreAllUserBlogs:StoreAllUserBlogs,
-    CopyFetchBlogForRendering:CopyUserFetchBlog
+    CopyFetchBlogForRendering:CopyUserFetchBlog,
+    UserImage:UserprofileImageReducer
   },
 })

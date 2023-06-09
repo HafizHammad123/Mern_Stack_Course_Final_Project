@@ -2,15 +2,16 @@ import React from "react";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useSelector ,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
-import { OpenModal , ChangeButton } from '../Redux/BlogsReducers/BlogRelatedReducer'
+import { OpenModal, ChangeButton } from '../Redux/BlogsReducers/BlogRelatedReducer'
 import { EditPost } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { FetchAllBlogsForSearch } from '../Redux/BlogsReducers/StoreBlogsPostSearch'
-export default function ShowUserOwnBlogs({UpdateHeadingPost}) {
-  const Dispatch=useDispatch()
+export default function ShowUserOwnBlogs({ UpdateHeadingPost }) {
+  const Dispatch = useDispatch()
   const StorePost = useSelector((state) => state.StorePost)
+  const UserImage=useSelector((state)=>state.UserImage)
   const token = JSON.parse(localStorage.getItem('SecretKey'));
   const SecretToken = `Bearer ${token.SecretToken}`
 
@@ -28,23 +29,22 @@ export default function ShowUserOwnBlogs({UpdateHeadingPost}) {
             }
 
           })
-        const FetchAllData= await Response.json()
+        const FetchAllData = await Response.json()
         Dispatch(FetchAllBlogs(FetchAllData))
         Dispatch(FetchAllBlogsForSearch(FetchAllData))
 
-        
+
       } catch (error) {
         console.log(error)
       }
     }
     GetAllPersonalBlog();
 
-  },[ ]);
+  }, []);
   const style = {
     flex: { lg: "400px", md: "250px", sm: "300px" },
   }
-  const DeletePost=async(DeleteItem)=>
-  {
+  const DeletePost = async (DeleteItem) => {
     try {
       const Response = await fetch(`http://localhost:8000/User/Delete/Post/${DeleteItem._id}/${DeleteItem.UserID}`,
         {
@@ -56,10 +56,10 @@ export default function ShowUserOwnBlogs({UpdateHeadingPost}) {
           }
 
         })
-      const FetchAllData= await Response.json()
+      const FetchAllData = await Response.json()
       Dispatch(FetchAllBlogs(FetchAllData.findall))
       Dispatch(FetchAllBlogsForSearch(FetchAllData.findall))
-      
+
     } catch (error) {
       console.log(error)
     }
@@ -71,7 +71,7 @@ export default function ShowUserOwnBlogs({UpdateHeadingPost}) {
           <Card sx={style}>
             <CardHeader
               avatar={
-                <Avatar >
+                <Avatar src={UserImage}>
 
                 </Avatar>
               }
@@ -90,8 +90,7 @@ export default function ShowUserOwnBlogs({UpdateHeadingPost}) {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites" onClick={()=>
-              {
+              <IconButton aria-label="add to favorites" onClick={() => {
                 Dispatch(OpenModal())
                 Dispatch(ChangeButton())
                 Dispatch(EditPost(PostItem))
@@ -99,7 +98,7 @@ export default function ShowUserOwnBlogs({UpdateHeadingPost}) {
               }}>
                 <EditIcon />
               </IconButton>
-              <IconButton aria-label="share" onClick={()=>DeletePost(PostItem)}>
+              <IconButton aria-label="share" onClick={() => DeletePost(PostItem)}>
                 <DeleteIcon />
               </IconButton>
             </CardActions>

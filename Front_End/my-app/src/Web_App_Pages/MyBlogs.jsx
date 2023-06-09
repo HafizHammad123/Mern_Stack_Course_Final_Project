@@ -14,14 +14,14 @@ import { Change } from '../Redux/BlogsReducers/BlogFormreducer1'
 import { FetchAllBlogs } from '../Redux/BlogsReducers/StoreBlogReducer';
 import { CreatePostStoreForSearch, FetchAllBlogsForSearch } from '../Redux/BlogsReducers/StoreBlogsPostSearch'
 import { useState } from "react";
-
 export default function MyBlogs() {
     const Dispatch = useDispatch()
     const [storesearchvalue, updatesearchvalue] = useState('')
-    const [HeadingPost,UpdateHeadingPost]=useState('Create Post')
+    const [HeadingPost, UpdateHeadingPost] = useState('Create Post')
     const BlogFieldData = useSelector((state) => state.BlogForm)
     const BlogRelatedStates = useSelector((state) => state.BlogRelatedStates)
     const StoreForSearchingBlog = useSelector((state) => state.StoreForSearchingBlog)
+    const UserImage=useSelector((state)=>state.UserImage)
     const { ModalStates, BlogPublishButton } = BlogRelatedStates
     const { Author_Name, Title, Description } = BlogFieldData
     const token = JSON.parse(localStorage.getItem('SecretKey'));
@@ -139,13 +139,12 @@ export default function MyBlogs() {
                 <Stack display={"flex"} flexDirection={"column"} gap={2} paddingY={"10px"} paddingX={"10px"}>
                     <TextField label="Search" type={"search"} onChange={Changevalue} onKeyDown={KeyDown} />
                     <Stack flexDirection={"row"} gap={1}>
-                        <Avatar></Avatar>
-                        <Box onClick={() =>
-                        {
+                        <Avatar src={UserImage}></Avatar>
+                        <Box onClick={() => {
                             UpdateHeadingPost("Create Post")
                             Dispatch(OpenModal())
-                        } 
-                           } sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>
+                        }
+                        } sx={{ cursor: "pointer" }} border={1} flex={1} display={"flex"} alignItems={"center"} fontFamily={"Raleway"} paddingX={2} borderRadius={3}>What,s on your mind</Box>
                         <Modal
                             open={ModalStates}
                             onClose={handleClose}
@@ -154,7 +153,7 @@ export default function MyBlogs() {
                         >
                             <Box sx={style}>
                                 <Typography variant="h5" display={"flex"} justifyContent={"center"} fonltFamily={"Raleway"} fontWeight={"500"} >
-                                    { HeadingPost }
+                                    {HeadingPost}
                                 </Typography>
                                 <Box component={"form"} id="BlogForm" display={"flex"} flexDirection={"column"} gap={2} onSubmit={BlogPublishButton ? PublishPost : UpdatePost}>
                                     <Form label={"Author Name"} value={Author_Name} name={'Author_Name'} onChange={(e) => Dispatch(Change({ [e.target.name]: e.target.value }))} />

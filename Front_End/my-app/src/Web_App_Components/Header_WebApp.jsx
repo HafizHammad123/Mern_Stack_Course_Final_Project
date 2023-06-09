@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { AppBar, Toolbar, Typography, Box, Badge, Avatar, Menu, MenuItem } from '@mui/material'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
-import UserPic from '../Web_App_Components/Images/hammad.jpeg'
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LoggedOut } from '../Redux/ProtectRoutesReducers/ProtectRoutes'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function HeaderWebApp() {
     const Dispatch = useDispatch()
     const navigate = useNavigate()
+    const UserImage=useSelector((state)=>state.UserImage)
     const [Open, SetOpen] = useState(false)
     const OpenProfile = () => {
         if (!Open) {
@@ -35,7 +36,7 @@ export default function HeaderWebApp() {
                         <EmailIcon></EmailIcon>
                     </Badge>
                     <Box display={"flex"} gap={1} alignItems={"center"}>
-                        <Avatar src={UserPic} onClick={() => OpenProfile()} sx={{ cursor: "pointer" }} />
+                        <Avatar src={UserImage} onClick={() => OpenProfile()} sx={{ cursor: "pointer" }} />
                         <Box display={"flex"} alignItems={"center"}>
 
                         </Box>

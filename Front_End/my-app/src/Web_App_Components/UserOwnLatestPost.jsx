@@ -1,9 +1,11 @@
 import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-export default function UserOwnLatestPost({UpdateTotalPost}) {
+import { useSelector } from "react-redux";
+export default function UserOwnLatestPost({ UpdateTotalPost }) {
   const [LatestPost, UpdateLatestPost] = useState([])
   const token = JSON.parse(localStorage.getItem('SecretKey'));
   const SecretToken = `Bearer ${token.SecretToken}`
+  const UserImage=useSelector((state)=>state.UserImage)
   useEffect(() => {
     const FetchLatestFivePost = async () => {
       const response = await fetch(`http://localhost:8000/User/Five/Latests/Post/${token.ID}`,
@@ -32,7 +34,7 @@ export default function UserOwnLatestPost({UpdateTotalPost}) {
             <Card>
               <CardHeader
                 avatar={
-                  <Avatar >
+                  <Avatar  src={UserImage}>
                   </Avatar>
                 }
                 title={LatestItem.Author_Name}

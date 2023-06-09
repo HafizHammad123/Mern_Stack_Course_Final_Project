@@ -23,8 +23,8 @@ const CreatePostMiddleWare = (req, res, next) => {
 }
 
 const CreatePostController = (req, res) => {
-    
-    CreatePostModelFunction(req.body).then((data) => res.send(data)).catch((error)=>console.log(error))
+
+    CreatePostModelFunction(req.body).then((data) => res.send(data)).catch((error) => console.log(error))
 
 }
-module.exports = { CreatePostMiddleWare, CreatePostController}
+module.exports = { CreatePostMiddleWare, CreatePostController }

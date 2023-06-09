@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 const app=express()
 
 
-
 app.use(cors())
 // app.use(bodyParser())
 app.use(bodyParser.json({parameterLimit:700000,limit: '50mb', extended: true}))
@@ -18,6 +17,7 @@ connectdb()
 
 // CALL USER MODULE HERE
 app.use('/User',User)
+app.use("/Upload",express.static("./Upload"))
 
 app.listen(8000,()=>
 {

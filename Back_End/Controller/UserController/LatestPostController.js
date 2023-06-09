@@ -21,9 +21,8 @@ const FiveLatestPostMiddleware=(req,res,next)=>
 }
 const FiveLatestPost=async(req,res)=>
 {
-    console.log(req.params)
+    
     const {latestid}=req.params
-    console.log("hello")
     try {
         const response=await Blog_Post.find({UserID:latestid}).limit(5).sort({$natural:-1}) 
         const TotalPost=await Blog_Post.find({UserID:latestid})

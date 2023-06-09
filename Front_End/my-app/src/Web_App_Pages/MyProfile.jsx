@@ -4,9 +4,17 @@ import SideNavWebApp from "../Web_App_Components/Side_Navbar";
 import FooterWebApp from "../Web_App_Components/Footer_WebApp";
 import NavbarMobileWeb from "../Web_App_Components/Navbar_Mobile";
 import { Stack, Box, Avatar, TextField, Button, Modal, Typography } from '@mui/material'
+import { useSelector, useDispatch } from "react-redux";
+import { StoreImagePath } from '../Redux/UserProfileImages/UserProfileImages'
 import EditIcon from '@mui/icons-material/Edit';
 export default function MyProfile() {
+    const Dispatch = useDispatch()
     const [open, setopen] = useState(false)
+    const [profileImage, UpdateProfileImage] = useState('')
+    const UserImage = useSelector((state) => state.UserImage)
+    const [storevalueofimage, updatestoreimagevalue] = useState('')
+    const token = JSON.parse(localStorage.getItem('SecretKey'));
+    const SecretToken = `Bearer ${token.SecretToken}`
     const style = {
         position: 'absolute',
         top: '50%',
@@ -28,6 +36,27 @@ export default function MyProfile() {
     const OpenEditForm = () => {
         setopen(true)
     }
+    const SubmitProfileImage = async (e) => {
+        updatestoreimagevalue('')
+        e.preventDefault()
+        const formdata = new FormData()
+        formdata.append("Profilename", profileImage)
+        formdata.append("ID", token.ID)
+        const response = await fetch('http://localhost:8000/User/Profile/Image',
+            {
+                method: "POST",
+                body: formdata,
+                headers:
+                {
+                    //   "Content-Type": "application/json",
+                    'Authorization': SecretToken
+                }
+            })
+        const data = await response.json()
+        Dispatch(StoreImagePath(`http://localhost:8000/${data.UserProfile}`))
+
+
+    }
     return <>
         <HeaderWebApp />
         <NavbarMobileWeb />
@@ -37,12 +66,21 @@ export default function MyProfile() {
                 <Box width={"150px"} height={"150px"} borderRadius={"50%"} >
                     <Avatar
                         alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
+                        src={UserImage}
                         sx={{ width: "100%", height: "100%" }}
                     />
 
                 </Box>
-                <TextField type="file" />
+                <Box display={"flex"} flexDirection={"column"} gap={3} component={"form"} id={"ChangeProfileImage"} onSubmit={SubmitProfileImage}>
+                    <TextField name="Profilename" type="file" value={storevalueofimage} onChange={(e) => {
+                        UpdateProfileImage(e.target.files[0])
+                        updatestoreimagevalue(e.target.value)
+                    }
+                    } required />
+                </Box>
+                <Button variant="contained" type="submit" form={"ChangeProfileImage"}>Submit</Button>
+
+
                 <Button startIcon={<EditIcon />} variant="contained" onClick={OpenEditForm}>Edit Profile</Button>
                 <Modal
                     open={open}
